@@ -12,6 +12,12 @@ console.log('Express Server Running');
 
 const newConnection = socket => {
     console.log('SOCKET => ', socket.id)
+
+    const handleThings = things => {
+        socket.broadcast.emit('things', things)
+    }
+
+    socket.on('things', handleThings)
 }
 
 io.sockets.on('connection', newConnection)
