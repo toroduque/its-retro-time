@@ -1,43 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import openSocket from 'socket.io-client'
-const socket = openSocket('http://localhost:3030');
+import React, { Fragment } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import Home from '../src/scenes/Home'
 
-const App = () => {
-    const [ things, setThings ] = useState([])
-    const [ currentThing, setCurrentThing ] = useState("")
+const GlobalStyle = createGlobalStyle`
+  body { margin: 0; }
+`
 
-    useEffect(() => {
-        socket.on('things', setThings)
-    });
-
-    const addCurrentThings = e => {
-        const newThing = e.target.value
-        setCurrentThing(newThing)
-    }
-
-    const addToThings = () => {
-        const newThings = [...things, currentThing]
-        socket.emit('things', newThings)
-
-        setThings(newThings)
-        setCurrentThing("")
-    }
-
-    return (
-        <div>
-            <div>
-                <input type="text" onChange={addCurrentThings} value={currentThing}></input>
-                <button onClick={addToThings} >Add thing</button>
-            </div>
-
-            Learning Websockets
-            
-            <ul>
-                { things && things.map(x => <li>{x}</li>) }
-            </ul>
-            
-        </div>
-    )
-}
+const App = () => (
+    <ThemeProvider theme={{margin: 0}}>
+        <Fragment>
+            {/* This styled-component inserts the global styles */}
+            <GlobalStyle /> 
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={Home}/>
+                </Switch>
+            </BrowserRouter>
+        </Fragment>
+    </ThemeProvider>
+)
 
 export default App
