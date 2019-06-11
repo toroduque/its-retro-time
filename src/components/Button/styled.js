@@ -6,7 +6,7 @@ export const ButtonWrapper = styled.button`
     justify-content: center;
     color: ${ props => props.hollow ? props.theme.PRIMARY : 'white' };
     border: ${ props => props.hollow ? `solid 1px ${props.theme.PRIMARY}` : 'none'};
-    padding: 1rem 2rem;
+    padding: 1rem 4rem;
     cursor: pointer;
     font-size: ${ props => props.fontSize };
     font-weight: 500;

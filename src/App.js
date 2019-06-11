@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { PRIMARY, DARKER } from './constants/colors'
+import { PRIMARY, DARKER, BLACK } from './constants/colors'
 import Home from '../src/scenes/Home'
 
 const GlobalStyle = createGlobalStyle`
@@ -26,13 +26,13 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
     PRIMARY,
-    DARKER
+    DARKER,
+    BLACK
 }
 
 const App = () => (
     <ThemeProvider theme={theme}>
         <Fragment>
-            {/* This styled-component inserts the global styles */}
             <GlobalStyle /> 
             <BrowserRouter>
                 <Switch>
