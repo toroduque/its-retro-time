@@ -1,6 +1,6 @@
 import React from 'react'
-import Logo from '../Logo'
-import Button from '../Button'
+import Logo from 'components/Logo'
+import Button from 'components/Button'
 import * as styled from './styled'
 
 const Header = () => {

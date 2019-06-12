@@ -1,5 +1,5 @@
 import React from 'react'
-import { PRIMARY } from '../../constants/colors'
+import { PRIMARY } from 'constants/colors'
 import * as styled from './styled'
 
 const Logo = ({width = 26, color = PRIMARY}) => (

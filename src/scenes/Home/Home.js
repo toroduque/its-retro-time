@@ -1,6 +1,7 @@
 import React from 'react'
-import Header from '../../components/Header'
-import Button from '../../components/Button'
+import Header from 'components/Header'
+import Button from 'components/Button'
+import Footer from 'components/Footer'
 import productExampleImage from '../../../public/img/product-example.svg'
 import * as styled from './styled'
 
@@ -13,7 +14,7 @@ const Home = () => (
                     Making retrospectives easier for remote teams
                 </styled.Hero>
                 <styled.SubHeading>
-                    An easy tool to help your team run your restrospective meetings in a simple and effective way
+                    An easy-to-use tool to help your team run restrospective meetings in a simple and effective way.
                 </styled.SubHeading>
                 <Button fontSize="2rem">Start now</Button>
             </styled.Left>
@@ -21,6 +22,7 @@ const Home = () => (
                 <styled.ProductImage src={productExampleImage} alt="Retro time example app image" />
             </styled.Right>
         </styled.Container>
+        <Footer />
     </styled.HomeWrapper>
 )
 
