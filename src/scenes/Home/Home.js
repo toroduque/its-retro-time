@@ -7,7 +7,7 @@ import * as styled from './styled'
 
 const Home = () => (
     <styled.HomeWrapper>
-        <Header />
+        <Header logoColor="white" />
         <styled.Container>
             <styled.Left>
                 <styled.Hero>
