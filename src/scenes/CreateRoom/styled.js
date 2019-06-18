@@ -9,6 +9,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-top: 1px solid ${ props => props.theme.LIGHT_GRAY };
 `
 
 export const HorizontalContainer = styled.div`
@@ -25,14 +26,18 @@ export const FormWrapper = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    border-top: 1px solid ${ props => props.theme.LIGHT_GRAY };
     margin: 6rem;
     width: 100%;
     max-width: 50rem;
+
+    h1 {
+        margin-bottom: 7rem;
+    }
 `
 
 export const ButtonsWrapper = styled.div`
     display: flex;
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;
+    margin: 3rem 0;
 `

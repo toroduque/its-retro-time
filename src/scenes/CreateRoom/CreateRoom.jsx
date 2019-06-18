@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom' 
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Input from 'components/forms/Input'
@@ -56,8 +57,10 @@ const CreateRoom = () => {
                             </ styled.Half>  
                         </styled.HorizontalContainer>
                         <styled.ButtonsWrapper>
-                            <Button hollow>Cancel</Button>
-                            <Button>Create</Button>
+                            <Button text>Cancel</Button>
+                            <Link to="/room/1">
+                                <Button>Create</Button>
+                            </Link>
                         </styled.ButtonsWrapper>
                     </form>
                 </styled.FormWrapper>

@@ -13,7 +13,9 @@ const Header = ({logoColor = PRIMARY}) => {
 
     return (
         <styled.HeaderWrapper>
-            <Logo color={logoColor}/>
+            <Link to="/">
+                <Logo color={logoColor}/>
+            </Link>
             <styled.NavlinksWrapper>
                 { menuOptions.map(option => <styled.Navlink key={option.name}>{option.name}</styled.Navlink>)}
                 <Link to="/create-room">
