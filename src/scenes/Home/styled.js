@@ -5,9 +5,9 @@ export const HomeWrapper = styled.div`
     background-image: url(${bgImage});
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100%;
     padding: 5rem 6rem;
 `
+
 export const Container = styled.div`
     display: flex;
 `
@@ -15,10 +15,11 @@ export const Container = styled.div`
 export const Left = styled.div`
     flex: 1;
     padding-right: 4rem;
-`
+`;
 
 export const Right = styled.div`
     flex: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
 `
@@ -41,6 +42,6 @@ export const SubHeading = styled.div`
 export const ProductImage = styled.img`
     width: 100%;
     margin: 10rem 0;
-    max-width: 50rem;
+    max-width: 60rem;
     min-width: 30rem;
 `
