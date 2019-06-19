@@ -8,7 +8,7 @@ export const FooterWrapper = styled.div`
     padding: 0 5rem;
     bottom: 0;
     height: 6rem;
-    margin-top: 10rem;
+    margin-top: ${ props => props.marginTop || 0 }rem;
     background-color: rgba(255, 255, 255, 0.5);
 `
 

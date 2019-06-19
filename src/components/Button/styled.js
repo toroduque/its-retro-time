@@ -5,7 +5,7 @@ export const ButtonWrapper = styled.button`
     align-content: center;
     justify-content: center;
     color: ${ props => props.hollow || props.text ? props.theme.PRIMARY : 'white' };
-    border: ${ props => props.hollow ? `solid 1px ${props.theme.PRIMARY}` : 'none' };
+    border: solid 0.1rem ${props => props.text ? 'transparent' : props.theme.PRIMARY};
     padding: 1rem 4rem;
     cursor: pointer;
     font-size: ${ props => props.fontSize };

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from './globalStyle'
-import { PRIMARY, DARKER, BLACK, LIGHT_GRAY, GRAY } from './constants/colors'
+import { PRIMARY, DARKER, BLACK, LIGHT_GRAY, GRAY, GREEN } from './constants/colors'
 import Home from 'scenes/Home'
 import CreateRoom from 'scenes/CreateRoom'
 import RetroRoom from 'scenes/RetroRoom/RetroRoom';
@@ -15,7 +15,8 @@ const theme = {
     DARKER,
     BLACK,
     GRAY,
-    LIGHT_GRAY
+    LIGHT_GRAY,
+    GREEN
 }
 
 const App = () => (

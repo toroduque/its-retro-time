@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Button from 'components/Button'
 import * as styled from './styled'
 import SidebarSection from 'scenes/RetroRoom/components/SidebarSection';
 import UsersList from 'scenes/RetroRoom/components/UsersList';
@@ -9,23 +8,23 @@ const Sidebar = ({users}) => {
 
     return (
         <styled.SidebarWrapper>
-            <SidebarSection title="Mode" icon="github">
-                <div style={{display: 'flex'}}>
-                    <Button 
+            <SidebarSection title="Mode" icon="mode">
+                <styled.ModeButtonsWrapper>
+                    <styled.ModeButton 
                         hollow={activeMode !== 'entry'}
                         onClick={() => setActiveMode('entry')}
                     >
                         Entry
-                    </Button>
-                    <Button 
+                    </styled.ModeButton>
+                    <styled.ModeButton 
                         hollow={activeMode !== 'review'}
                         onClick={() => setActiveMode('review')}
                     >
                         Review
-                    </Button>
-                </div>
+                    </styled.ModeButton>
+                </styled.ModeButtonsWrapper>
             </SidebarSection>
-            <SidebarSection title="Participants" icon="github">
+            <SidebarSection title="Participants" icon="users">
                 <UsersList users={users}/>
             </SidebarSection>
         </styled.SidebarWrapper>

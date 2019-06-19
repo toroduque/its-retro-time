@@ -4,7 +4,7 @@ import * as styled from './styled'
 const UsersList = ({users}) => (
     <styled.UsersListWrapper>
         <ul>
-            { users && users.map(user => <li>{user.name}</li>) }
+            { users && users.map(user => <li key={user.name}>{user.name}</li>) }
         </ul>
     </styled.UsersListWrapper>
 )

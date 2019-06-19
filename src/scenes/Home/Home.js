@@ -25,7 +25,7 @@ const Home = () => (
                 <styled.ProductImage src={productExampleImage} alt="Retro time example app image" />
             </styled.Right>
         </styled.Container>
-        <Footer />
+        <Footer marginTop="10"/>
     </styled.HomeWrapper>
 )
 

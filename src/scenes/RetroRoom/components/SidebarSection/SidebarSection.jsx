@@ -6,7 +6,7 @@ import * as styled from './styled'
 const SidebarSection = ({icon, title, children}) => (
     <styled.SidebarSectionWrapper>
         <div style={{display: 'flex', alignItems: 'center'}}>
-            <Icon glyph={icon} size="15" color={GRAY} />
+            <Icon glyph={icon} size="18" color={GRAY} />
             <h3>{title}</h3>
         </div>
         {children}
