@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 1.4rem;
     }
 
-    button, input {
+    button, input, textarea {
         font-family: 'Raleway', Arial, Helvetica, sans-serif;
         font-size: 1.4rem;
         box-sizing: border-box;

@@ -7,8 +7,9 @@ import * as styled from './styled'
 
 const Header = ({logoColor = PRIMARY}) => {
     const menuOptions = [
-        { name: 'About', link: '/about' },
-        { name: 'Sponsor', link: '/sponsor' }
+        { name: 'About', path: '/' },
+        { name: 'Sponsor', path: '/' },
+        { name: 'Join Room', path: '/join-room' }
     ]
 
     return (
@@ -17,7 +18,10 @@ const Header = ({logoColor = PRIMARY}) => {
                 <Logo color={logoColor}/>
             </Link>
             <styled.NavlinksWrapper>
-                { menuOptions.map(option => <styled.Navlink key={option.name}>{option.name}</styled.Navlink>)}
+                { menuOptions.map(option => (
+                    <styled.Navlink key={option.name}>
+                        <Link to={option.path}>{option.name}</Link>
+                    </styled.Navlink>))}
                 <Link to="/create-room">
                     <Button hollow fontSize="1.6rem">Create Room</Button>
                 </Link>

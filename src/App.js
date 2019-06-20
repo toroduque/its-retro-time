@@ -5,6 +5,7 @@ import GlobalStyle from './globalStyle'
 import { PRIMARY, DARKER, BLACK, LIGHT_GRAY, GRAY, GREEN } from './constants/colors'
 import Home from 'scenes/Home'
 import CreateRoom from 'scenes/CreateRoom'
+import JoinRoom from 'scenes/JoinRoom'
 import RetroRoom from 'scenes/RetroRoom/RetroRoom';
 
 // Styled-Compoents injects the global styles
@@ -27,6 +28,7 @@ const App = () => (
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/create-room" component={CreateRoom}/>
+                    <Route path="/join-room" component={JoinRoom}/>
                     <Route path="/room/:id" component={RetroRoom} />
                 </Switch>
             </BrowserRouter>

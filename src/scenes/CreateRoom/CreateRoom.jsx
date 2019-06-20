@@ -57,7 +57,9 @@ const CreateRoom = () => {
                             </ styled.Half>  
                         </styled.HorizontalContainer>
                         <styled.ButtonsWrapper>
-                            <Button text>Cancel</Button>
+                            <Link to="/">
+                                <Button text>Cancel</Button>
+                            </Link>
                             <Link to="/room/1">
                                 <Button>Create</Button>
                             </Link>

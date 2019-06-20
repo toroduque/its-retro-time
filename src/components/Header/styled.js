@@ -15,8 +15,11 @@ export const NavlinksWrapper = styled.div`
 `
 
 export const Navlink = styled.p`
-    color: black;
     margin-right: 4rem;
     font-size: 1.6rem;
     font-weight: 500;
+
+    a {
+        color: black;
+    }
 `
