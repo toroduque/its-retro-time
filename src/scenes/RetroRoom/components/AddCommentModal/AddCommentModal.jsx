@@ -12,9 +12,11 @@ const AddCommentModal = ({title, type, toggleModal }) => (
             <styled.AddCommentWrapper>
                 <styled.TitleWrapper>
                     <h2>{title}</h2>
-                    <Icon  glyph="close" size="14" color={GRAY} />
+                    <Button icon text onClick={toggleModal}>
+                        <Icon  glyph="close" size="14" color={GRAY} />
+                    </Button>
                 </styled.TitleWrapper>
-                <TextArea rows="5" placeholder="Keep up the good work..."/>
+                <TextArea rows="6" placeholder="Keep up the good work..."/>
                 <styled.ButtonsWrapper>
                     <Button text onClick={toggleModal}>Cancel</Button>
                     <Button>Post</Button>

@@ -15,10 +15,11 @@ export const Overlay = styled.div`
 export const AddCommentWrapper = styled.div`
     width: 38rem;
     background-color: white;
-    padding: 2rem;
+    padding: 1rem 3rem 3rem 3rem;
 
     h2 {
-        color: ${ props => props.theme.PRIMARY }
+        color: ${ props => props.theme.PRIMARY };
+        font-weight: 500;
     }
 `
 
@@ -32,4 +33,5 @@ export const ButtonsWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    margin-top: 1rem;
 `
