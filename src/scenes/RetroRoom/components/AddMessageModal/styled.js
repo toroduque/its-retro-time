@@ -1,19 +1,11 @@
 import styled from 'styled-components'
 
-export const Overlay = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    background-color: rgba(0,0,0,0.2);
-    bottom: 0;
-    right: 0;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-`
-
 export const AddMessageWrapper = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
     width: 38rem;
     background-color: white;
     padding: 1rem 3rem 3rem 3rem;

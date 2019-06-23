@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { RoomContext } from 'contexts'
 import Button from 'components/Button'
 import Card from 'scenes/RetroRoom/components/Card'
-import AddMessageModal from 'scenes/RetroRoom/components/AddMessageModal'
-
 import * as styled from './styled'
 
 const Column = ({title, cards}) => {
     const [ columnTitle, setColumnTitle ] = useState('')
-    const [ showAddModal, setShowAddModal ] = useState(false)
+    const roomContext = useContext(RoomContext)
 
     useEffect(() => {
         setColumnTitle(title)
@@ -17,22 +16,19 @@ const Column = ({title, cards}) => {
         setColumnTitle(e.target.value)
     }
 
-    const toggleAddModal = () => setShowAddModal(!showAddModal)
+    const showAddModal = () => {
+        roomContext.dispatch({type: 'SHOW_ADD_MODAL'})
+    }
 
     return ( 
         <styled.ColumnWrapper>
             <input value={columnTitle} onChange={handleSetTitle}/>
-            <Button text onClick={toggleAddModal}>
+            <Button text onClick={showAddModal}>
                 + ADD 
             </Button>
             <styled.CardsWrapper>
-                { cards && cards.map(card => (
-                    <Card key={card.id} 
-                        columnTitle={columnTitle}
-                        {...card} 
-                    />) )}
+                { cards && cards.map(card => <Card key={card.id} {...card} /> )}
             </styled.CardsWrapper>
-            { showAddModal && <AddMessageModal title={columnTitle} type={columnTitle} toggleModal={toggleAddModal} /> }
         </styled.ColumnWrapper>
     )
 }

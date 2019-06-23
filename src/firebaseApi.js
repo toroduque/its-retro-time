@@ -6,6 +6,11 @@ export const getMessages = async () => {
     return messages
 }
 
+export const getMessage = async (id) => {
+    const message = await firestore.collection('messages').doc(id).get()
+    return message
+}
+
 export const subscribeMessages = async (setMessages) => {
     const unsubscribeFn = await firestore.collection('messages').onSnapshot(snapshot => {
         const messages = snapshot.docs.map(collectIdsAndDocs)
