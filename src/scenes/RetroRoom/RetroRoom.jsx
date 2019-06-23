@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
+import { subscribeMessages } from 'firebaseApi';
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Sidebar from 'scenes/RetroRoom/components/Sidebar'
@@ -12,27 +13,31 @@ const mockUsers = [
     { name: 'Bran' },
 ]
 
-const mockCards = [
-    { user: 'John', message: 'Keep it up man!'},
-    { user: 'Sansa', message: 'Please keep buying cheese'},
-    { user: 'Rob', message: 'I liked the new curtain'},
-]
+const RetroRoom = () => {
+    const [ messages, setMessages ] = useState([])
+    let unsubscribe = null
 
-const RetroRoom = () => (
-    <div>
-        <styled.HeaderWrapper>
-            <Header />
-        </styled.HeaderWrapper>
-        <styled.RoomWrapper>
-            <Sidebar users={mockUsers} />
-            <styled.ColumnsWrapper>
-                <Column title="Good" cards={mockCards} />
-                <Column title="Not so good" cards={mockCards} />
-                <Column title="To improve" cards={mockCards} />
-            </styled.ColumnsWrapper>
-        </styled.RoomWrapper>
-        <Footer />
-    </div>
-)
+    useEffect(() => {
+        subscribeMessages(setMessages).then(response => unsubscribe = response)
+        return function cleanUp() { unsubscribe() }
+    }, [])
+
+    return (
+        <Fragment>
+            <styled.HeaderWrapper>
+                <Header />
+            </styled.HeaderWrapper>
+            <styled.RoomWrapper>
+                <Sidebar users={mockUsers} />
+                <styled.ColumnsWrapper>
+                    <Column title="Good" cards={messages} />
+                    <Column title="Not so good" cards={messages} />
+                    <Column title="To improve" cards={messages} />
+                </styled.ColumnsWrapper>
+            </styled.RoomWrapper>
+            <Footer />
+        </Fragment>
+    )
+}
 
 export default RetroRoom

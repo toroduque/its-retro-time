@@ -10,12 +10,16 @@ export const Overlay = styled.div`
     right: 0;
     top: 0;
     left: 0;
+    pointer-events: none;
+    z-index: 1;
 `
 
-export const AddCommentWrapper = styled.div`
+export const EditMessageWrapper = styled.div`
     width: 38rem;
     background-color: white;
     padding: 1rem 3rem 3rem 3rem;
+    z-index: 2;
+    pointer-events: none;
 
     h2 {
         color: ${ props => props.theme.PRIMARY };
