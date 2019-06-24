@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { MODAL_WIDTH } from 'constants/layout'
 
 export const AddMessageWrapper = styled.div`
     position: fixed;
@@ -6,7 +7,7 @@ export const AddMessageWrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 4;
-    width: 38rem;
+    width: ${ MODAL_WIDTH }rem;
     background-color: white;
     padding: 1rem 3rem 3rem 3rem;
 

@@ -27,3 +27,7 @@ export const postMessage = async (message) => {
 export const updateMessage = async (id, message) => {
     await firestore.collection('messages').doc(id).update({message})
 }
+
+export const deleteMessage = async (id) => {
+    await firestore.collection('messages').doc(id).delete()
+}

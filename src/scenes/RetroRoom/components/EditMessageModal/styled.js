@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { MODAL_WIDTH } from 'constants/layout'
 
 
 export const EditMessageWrapper = styled.div`
@@ -7,7 +7,7 @@ export const EditMessageWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 38rem;
+    width: ${ MODAL_WIDTH }rem;
     background-color: white;
     padding: 1rem 3rem 3rem 3rem;
     z-index: 4;
@@ -28,5 +28,11 @@ export const ButtonsWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
+`
+
+export const BottomWrapper = styled.div`
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
     margin-top: 1rem;
 `

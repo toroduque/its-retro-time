@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { updateMessage } from 'firebaseApi'
+import { updateMessage, deleteMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { GRAY } from 'constants/colors'
 import Modal from 'components/Modal'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 import TextArea from 'components/forms/TextArea'
+import InlineDelete from 'components/InlineDelete'
 import * as styled from './styled'
 
 const EditMessageModal = () => {
@@ -19,9 +20,14 @@ const EditMessageModal = () => {
 
     const handleSetNewMessage = e => setCurrentMessage(e.target.value)
 
-    const handleUpdateMessage = () => {
-        updateMessage(selectedMessage.id, currentMessage)
+    const handleUpdateMessage = async () => {
+        await updateMessage(selectedMessage.id, currentMessage)
         hideEditModal()
+    }
+
+    const handleDeleteMessage = async () => {
+       await deleteMessage(selectedMessage.id)
+       hideEditModal()
     }
 
     const hideEditModal = () => {
@@ -38,15 +44,18 @@ const EditMessageModal = () => {
                     </Button>
                 </styled.TitleWrapper>
                 <TextArea 
-                    rows="6" 
+                    rows="8" 
                     value={currentMessage} 
                     onChange={handleSetNewMessage}
                     placeholder="Keep up the good work..."
                 />
-                <styled.ButtonsWrapper>
-                    <Button text onClick={hideEditModal}>Cancel</Button>
-                    <Button onClick={handleUpdateMessage}>Update</Button>
-                </styled.ButtonsWrapper>
+                <styled.BottomWrapper >
+                    <InlineDelete onDelete={handleDeleteMessage}/>
+                    <styled.ButtonsWrapper>
+                        <Button text onClick={hideEditModal}>Cancel</Button>
+                        <Button onClick={handleUpdateMessage}>Update</Button>
+                    </styled.ButtonsWrapper>
+                </styled.BottomWrapper>
             </styled.EditMessageWrapper>
         </Modal>
     )
