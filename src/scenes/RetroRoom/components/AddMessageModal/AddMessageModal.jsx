@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { firestore } from '../../../../firebase'
 import { postMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { GRAY } from 'constants/colors'
@@ -15,9 +16,10 @@ const AddMessageModal = ({title = "Good" }) => {
     const handleSetMessage = e => setMessage(e.target.value)
 
     const handlePostMessage = async () => {
+        const { id } = roomContext.state
         const body = {
             user: 'Daniel',
-            roomId: '/rooms/abcd',
+            roomRef: firestore.doc(`rooms/${id}`),
             state: 'unread',
             type: 'Continue',
             creationTime: new Date(),
@@ -42,7 +44,7 @@ const AddMessageModal = ({title = "Good" }) => {
                     </Button>
                 </styled.TitleWrapper>
                 <TextArea 
-                    rows="6" 
+                    rows="8" 
                     value={message} 
                     onChange={handleSetMessage}
                     placeholder="Keep up the good work..."

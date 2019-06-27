@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { getMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
-import { collectIdsAndDocs } from 'utilities'
 import Unread from './components/Unread'
 import Read from './components/Read'
 import * as styled from './styled'
@@ -14,8 +13,7 @@ const Card = ({ id, user, message}) => {
     const selectMessage = (message) => roomContext.dispatch({type: 'SELECT_MESSAGE', payload: message})
 
     const handleShowEditModal = async () => {
-        const doc = await getMessage(id)
-        const selectedMessage = collectIdsAndDocs(doc)
+        const selectedMessage = await getMessage(id)
         await selectMessage(selectedMessage)
         showEditModal()
     }

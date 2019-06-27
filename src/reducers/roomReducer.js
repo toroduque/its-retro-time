@@ -1,5 +1,17 @@
 const roomReducer = (state, action) => {
     switch(action.type) {
+        case 'SET_ROOM_ID': 
+            return {
+                ...state,
+                id: action.payload
+            }
+
+        case 'SET_USERS': 
+            return {
+                ...state,
+                users: action.payload
+            }
+
         case 'SET_MESSAGES':
             return {
                 ...state,

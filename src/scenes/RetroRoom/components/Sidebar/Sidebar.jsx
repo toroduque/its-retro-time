@@ -3,7 +3,7 @@ import * as styled from './styled'
 import SidebarSection from 'scenes/RetroRoom/components/SidebarSection';
 import UsersList from 'scenes/RetroRoom/components/UsersList';
 
-const Sidebar = ({users}) => {
+const Sidebar = () => {
     const [ activeMode, setActiveMode ] = useState('entry')
 
     return (
@@ -25,7 +25,7 @@ const Sidebar = ({users}) => {
                 </styled.ModeButtonsWrapper>
             </SidebarSection>
             <SidebarSection title="Participants" icon="users">
-                <UsersList users={users}/>
+                <UsersList />
             </SidebarSection>
         </styled.SidebarWrapper>
     )
