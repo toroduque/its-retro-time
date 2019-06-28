@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react'
+import { withRouter } from 'react-router-dom'
+import { firestore } from '../../../../firebase'
 import { postMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { GRAY } from 'constants/colors'
@@ -8,16 +10,17 @@ import Icon from 'components/Icon'
 import TextArea from 'components/forms/TextArea'
 import * as styled from './styled'
 
-const AddMessageModal = ({title = "Good" }) => {
+const AddMessageModal = ({title = "Good", match }) => {
     const [ message, setMessage ] = useState('')
     const roomContext = useContext(RoomContext)
+    const { id } = match.params
 
     const handleSetMessage = e => setMessage(e.target.value)
 
     const handlePostMessage = async () => {
         const body = {
             user: 'Daniel',
-            roomId: '/rooms/abcd',
+            roomRef: firestore.doc(`rooms/${id}`),
             state: 'unread',
             type: 'Continue',
             creationTime: new Date(),
@@ -42,7 +45,7 @@ const AddMessageModal = ({title = "Good" }) => {
                     </Button>
                 </styled.TitleWrapper>
                 <TextArea 
-                    rows="6" 
+                    rows="8" 
                     value={message} 
                     onChange={handleSetMessage}
                     placeholder="Keep up the good work..."
@@ -58,4 +61,4 @@ const AddMessageModal = ({title = "Good" }) => {
 
 
 
-export default AddMessageModal
+export default withRouter(AddMessageModal)

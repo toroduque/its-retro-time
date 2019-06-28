@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom' 
+import React, { useState, useContext } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { createRoom, getRoom } from 'firebaseApi'
+import { RoomContext } from 'contexts'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Input from 'components/forms/Input'
@@ -7,10 +9,12 @@ import Label from 'components/forms/Label'
 import Button from 'components/Button'
 import * as styled from './styled'
 
-const CreateRoom = () => {
+const CreateRoom = ({history}) => {
     const [ name, setName ] = useState('')
     const [ team, seTeam ] = useState('')
     const [ organisation, setOrganisation ] = useState('')
+    const roomContext = useContext(RoomContext)
+    
 
     function handleName(e) {
         setName(e.target.value)
@@ -22,6 +26,20 @@ const CreateRoom = () => {
     
     function handleOrganisation(e) {
         setOrganisation(e.target.value)
+    }
+
+    async function handleCreateRoom() {
+        if (!name) {
+            return
+        }
+
+        const room = { creationTime: new Date(), users: [ name ]}
+        const newRoom = await createRoom(room)
+        const { id, users } = await getRoom(newRoom.id)
+        roomContext.dispatch({type: 'SET_ROOM_ID', payload: id})
+        roomContext.dispatch({type: 'SET_USERS', payload: users})
+
+        history.push(`room/${newRoom.id}`)
     }
 
     return (
@@ -60,9 +78,7 @@ const CreateRoom = () => {
                             <Link to="/">
                                 <Button text>Cancel</Button>
                             </Link>
-                            <Link to="/room/1">
-                                <Button>Create</Button>
-                            </Link>
+                            <span onClick={handleCreateRoom}>Create</span>
                         </styled.ButtonsWrapper>
                     </form>
                 </styled.FormWrapper>
@@ -72,4 +88,4 @@ const CreateRoom = () => {
     )
 }
 
-export default CreateRoom
+export default withRouter(CreateRoom)

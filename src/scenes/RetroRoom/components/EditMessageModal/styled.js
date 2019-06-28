@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { MODAL_WIDTH } from 'constants/layout'
 
-
 export const EditMessageWrapper = styled.div`
     position: fixed;
     top: 50%;
