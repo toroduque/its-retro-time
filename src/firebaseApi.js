@@ -84,3 +84,15 @@ export const getRoom = async (id) => {
         console.error(`Error retrieving data of a room: ${error}`)
     }
 }
+
+export const addUserToRoom = async (roomId, user) => {
+    try {
+        const room = await getRoom(roomId)
+        const { users } = room
+        const newUsers = [ ...users, user ]
+
+        await firestore.collection('rooms').doc(roomId).update({users: newUsers})
+    } catch (error) {
+        console.error(`Error adding a new user to existing room: ${error}`)
+    }
+}

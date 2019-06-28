@@ -29,6 +29,9 @@ const CreateRoom = ({history}) => {
     }
 
     async function handleCreateRoom() {
+        e.preventDefault()
+
+        // TODO: Add validations
         if (!name) {
             return
         }
@@ -78,7 +81,7 @@ const CreateRoom = ({history}) => {
                             <Link to="/">
                                 <Button text>Cancel</Button>
                             </Link>
-                            <span onClick={handleCreateRoom}>Create</span>
+                            <Button onClick={e => handleCreateRoom(e)}>Create</Button>
                         </styled.ButtonsWrapper>
                     </form>
                 </styled.FormWrapper>
