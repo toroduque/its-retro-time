@@ -12,7 +12,7 @@ import * as styled from './styled'
 const RetroRoom = ({match}) => {
     const roomContext = useContext(RoomContext)
     const { messages, showAddModal, showEditModal } = roomContext.state
-    const id = roomContext.state.id || match.params.id
+    const id = match.params.id
     let unsubscribe = null
 
     useEffect(() => {

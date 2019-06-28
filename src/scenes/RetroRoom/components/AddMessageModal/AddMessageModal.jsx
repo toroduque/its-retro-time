@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { withRouter } from 'react-router-dom'
 import { firestore } from '../../../../firebase'
 import { postMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
@@ -9,14 +10,14 @@ import Icon from 'components/Icon'
 import TextArea from 'components/forms/TextArea'
 import * as styled from './styled'
 
-const AddMessageModal = ({title = "Good" }) => {
+const AddMessageModal = ({title = "Good", match }) => {
     const [ message, setMessage ] = useState('')
     const roomContext = useContext(RoomContext)
+    const { id } = match.params
 
     const handleSetMessage = e => setMessage(e.target.value)
 
     const handlePostMessage = async () => {
-        const { id } = roomContext.state
         const body = {
             user: 'Daniel',
             roomRef: firestore.doc(`rooms/${id}`),
@@ -60,4 +61,4 @@ const AddMessageModal = ({title = "Good" }) => {
 
 
 
-export default AddMessageModal
+export default withRouter(AddMessageModal)

@@ -9,8 +9,7 @@ const UsersList = ({match}) => {
     const users = roomContext.state.users || []
     const { id } = match.params
     
-
-    console.log('users.users', users.users)
+    let unsubscribe = null;
 
     useEffect(() => {
         subscribeUsers(id, setUsers).then(response => unsubscribe = response)
@@ -23,7 +22,6 @@ const UsersList = ({match}) => {
             payload: users
         })
     }
-
 
     return (
         <styled.UsersListWrapper>
