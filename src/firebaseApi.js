@@ -1,5 +1,7 @@
-import { firestore } from './firebase'
+import { firestore, auth } from './firebase'
 import { collectIdsAndDocs } from './utilities'
+
+// ---   MESSAGES   ---
 
 export const getMessage = async (id) => {
     try {
@@ -9,7 +11,7 @@ export const getMessage = async (id) => {
     } catch (error) {
         console.error(`Error retriving a message: ${error}`)
     }
-}
+} 
 
 export const subscribeMessages = async (roomId, setMessages) => {
     try {
@@ -24,22 +26,6 @@ export const subscribeMessages = async (roomId, setMessages) => {
         return unsubscribeFn
     } catch (error) {
         console.error(`Error subscribing to Messages updates: ${error}`)
-    }
-}
-
-export const subscribeUsers = async (roomId, setUsers) => {
-    try {
-        const unsubscribeFn = await firestore.collection('rooms')
-        .doc(roomId)
-        .onSnapshot(snapshot => {
-            const roomData = collectIdsAndDocs(snapshot)
-            setUsers(roomData.users)
-        })
-
-    return unsubscribeFn
-
-    } catch (error) {
-        console.error(`Error subscribing to Users updates: ${error}`)
     }
 }
 
@@ -67,6 +53,8 @@ export const deleteMessage = async (id) => {
     }
 }
 
+// ---   ROOMS   ---
+
 export const createRoom = async (room) => {
     try {
         return await firestore.collection('rooms').add(room)
@@ -85,6 +73,22 @@ export const getRoom = async (id) => {
     }
 }
 
+export const subscribeUsers = async (roomId, setUsers) => {
+    try {
+        const unsubscribeFn = await firestore.collection('rooms')
+        .doc(roomId)
+        .onSnapshot(snapshot => {
+            const roomData = collectIdsAndDocs(snapshot)
+            setUsers(roomData.users)
+        })
+
+    return unsubscribeFn
+
+    } catch (error) {
+        console.error(`Error subscribing to Users updates: ${error}`)
+    }
+}
+
 export const addUserToRoom = async (roomId, user) => {
     try {
         const room = await getRoom(roomId)
@@ -94,5 +98,25 @@ export const addUserToRoom = async (roomId, user) => {
         await firestore.collection('rooms').doc(roomId).update({users: newUsers})
     } catch (error) {
         console.error(`Error adding a new user to existing room: ${error}`)
+    }
+}
+
+// ---   AUTH   ---
+export const subscribeAuth = async(setCurrentUser) => {
+    try {
+        const unsubscribeFn = await auth.onAuthStateChanged(user => setCurrentUser(user))
+        return unsubscribeFn
+
+    } catch (error) {
+        console.error(`Error subscribing to Auth updates: ${error}`)
+    }
+}
+
+export const signUp = async (displayName) => {
+    try {
+        await auth.signInAnonymously()
+        await auth.currentUser.updateProfile({ displayName })
+    } catch (error) {
+        console.error(`Error signing up a new user: ${error}`)
     }
 }

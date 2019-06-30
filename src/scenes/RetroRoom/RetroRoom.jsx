@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react'
-import { subscribeMessages } from 'firebaseApi';
+import { Redirect } from 'react-router-dom'
+import { subscribeMessages, subscribeAuth } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { FIRST, SECOND, THIRD } from 'constants/column'
 import Header from 'components/Header'
@@ -10,21 +11,34 @@ import AddMessageModal from 'scenes/RetroRoom/components/AddMessageModal'
 import EditMessageModal from 'scenes/RetroRoom/components/EditMessageModal'
 import * as styled from './styled'
 
-const RetroRoom = ({match}) => {
+const RetroRoom = ({ match }) => {
     const roomContext = useContext(RoomContext)
     const { messages, showAddModal, showEditModal } = roomContext.state
     const { id } = match.params
-    let unsubscribe = null
+    let unsubscribeFromMessages = null
+    let unsubscribeFromAuth = null
 
     useEffect(() => {
-        subscribeMessages(id, setMessages).then(response => unsubscribe = response)        
-        return function cleanUp() { unsubscribe() }
+        subscribeMessages(id, setMessages).then(response => unsubscribeFromMessages = response)
+        subscribeAuth(setCurrentUser).then(response => unsubscribeFromAuth = response) 
+
+        return function cleanUp() { 
+                unsubscribeFromMessages()
+                unsubscribeFromAuth() 
+            }
     }, [])
 
     const setMessages = messages => {
         roomContext.dispatch({
             type: 'SET_MESSAGES',
             payload: messages
+        })
+    }
+
+    const setCurrentUser = user => {
+        roomContext.dispatch({
+            type: 'SET_CURRENT_USER',
+            payload: user
         })
     }
 

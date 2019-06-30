@@ -6,8 +6,9 @@ import * as styled from './styled'
 
 const UsersList = ({match}) => {
     const roomContext = useContext(RoomContext)
-    const users = roomContext.state.users || []
+    const { users, currentUser } = roomContext.state
     const { id } = match.params
+    const userName = currentUser && currentUser.displayName
     
     let unsubscribe = null;
 
@@ -26,7 +27,10 @@ const UsersList = ({match}) => {
     return (
         <styled.UsersListWrapper>
             <ul>
-                { users && users.map(user => <li key={user}>{user}</li>) }
+                { users && users.map(user => (
+                    <styled.User key={user} isActive={user === userName}>{user}</styled.User>
+                    )) 
+                }
             </ul>
         </styled.UsersListWrapper>
     )
