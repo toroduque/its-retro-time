@@ -10,11 +10,12 @@ import Icon from 'components/Icon'
 import TextArea from 'components/forms/TextArea'
 import * as styled from './styled'
 
-const AddMessageModal = ({title = "Good", match }) => {
+const AddMessageModal = ({ match }) => {
     const [ message, setMessage ] = useState('')
     const roomContext = useContext(RoomContext)
     const { id } = match.params
     const { selectedColumn, currentUser } = roomContext.state
+    const { title, position } = selectedColumn
  
     const handleSetMessage = e => setMessage(e.target.value)
 
@@ -24,7 +25,7 @@ const AddMessageModal = ({title = "Good", match }) => {
             roomRef: firestore.doc(`rooms/${id}`),
             state: 'unread',
             creationTime: new Date(),
-            columnNumber: selectedColumn,
+            columnNumber: position,
             message
         }
 

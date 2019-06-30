@@ -17,7 +17,8 @@ const Column = ({title, cards, position}) => {
     }
 
     const showAddModal = () => {
-        roomContext.dispatch({type: 'SHOW_ADD_MODAL', payload: position})
+        const payload = { position, title }
+        roomContext.dispatch({type: 'SHOW_ADD_MODAL', payload })
     }
 
     const filterCardsByColumnNumber = () => {
