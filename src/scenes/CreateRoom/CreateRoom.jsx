@@ -28,7 +28,10 @@ const CreateRoom = ({history}) => {
         setOrganisation(e.target.value)
     }
 
-    async function handleCreateRoom() {
+    async function handleCreateRoom(e) {
+        e.preventDefault()
+
+        // TODO: Add validations
         if (!name) {
             return
         }
@@ -78,7 +81,7 @@ const CreateRoom = ({history}) => {
                             <Link to="/">
                                 <Button text>Cancel</Button>
                             </Link>
-                            <span onClick={handleCreateRoom}>Create</span>
+                            <Button onClick={e => handleCreateRoom(e)}>Create</Button>
                         </styled.ButtonsWrapper>
                     </form>
                 </styled.FormWrapper>
