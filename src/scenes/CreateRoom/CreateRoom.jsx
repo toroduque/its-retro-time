@@ -28,7 +28,7 @@ const CreateRoom = ({history}) => {
         setOrganisation(e.target.value)
     }
 
-    async function handleCreateRoom() {
+    async function handleCreateRoom(e) {
         e.preventDefault()
 
         // TODO: Add validations

@@ -27,13 +27,15 @@ const roomReducer = (state, action) => {
         case 'SHOW_ADD_MODAL':
             return {
                 ...state,
-                showAddModal: true
+                showAddModal: true,
+                selectedColumn: action.payload
             }
             
         case 'HIDE_ADD_MODAL':
             return {
                 ...state,
-                showAddModal: false
+                showAddModal: false,
+                selectedColumn: null
             }
 
         case 'SHOW_EDIT_MODAL':

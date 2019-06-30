@@ -14,7 +14,8 @@ const AddMessageModal = ({title = "Good", match }) => {
     const [ message, setMessage ] = useState('')
     const roomContext = useContext(RoomContext)
     const { id } = match.params
-
+    const { selectedColumn } = roomContext.state
+ 
     const handleSetMessage = e => setMessage(e.target.value)
 
     const handlePostMessage = async () => {
@@ -24,6 +25,7 @@ const AddMessageModal = ({title = "Good", match }) => {
             state: 'unread',
             type: 'Continue',
             creationTime: new Date(),
+            columnNumber: selectedColumn,
             message
         }
 

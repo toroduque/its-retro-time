@@ -4,7 +4,7 @@ import Button from 'components/Button'
 import Card from 'scenes/RetroRoom/components/Card'
 import * as styled from './styled'
 
-const Column = ({title, cards}) => {
+const Column = ({title, cards, position}) => {
     const [ columnTitle, setColumnTitle ] = useState('')
     const roomContext = useContext(RoomContext)
 
@@ -17,8 +17,14 @@ const Column = ({title, cards}) => {
     }
 
     const showAddModal = () => {
-        roomContext.dispatch({type: 'SHOW_ADD_MODAL'})
+        roomContext.dispatch({type: 'SHOW_ADD_MODAL', payload: position})
     }
+
+    const filterCardsByColumnNumber = () => {
+        return cards && cards.filter(card => card.columnNumber === position)
+    }
+
+    const filteredCards = filterCardsByColumnNumber()
 
     return ( 
         <styled.ColumnWrapper>
@@ -27,7 +33,7 @@ const Column = ({title, cards}) => {
                 + ADD 
             </Button>
             <styled.CardsWrapper>
-                { cards && cards.map(card => <Card key={card.id} {...card} /> )}
+                { filteredCards && filteredCards.map(card => <Card key={card.id} {...card} />)}
             </styled.CardsWrapper>
         </styled.ColumnWrapper>
     )
