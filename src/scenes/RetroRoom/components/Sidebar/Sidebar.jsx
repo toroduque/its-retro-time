@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { RoomContext } from 'contexts'
 import * as styled from './styled'
 import SidebarSection from 'scenes/RetroRoom/components/SidebarSection';
 import UsersList from 'scenes/RetroRoom/components/UsersList';
 
 const Sidebar = () => {
+    const roomContext = useContext(RoomContext)
     const [ activeMode, setActiveMode ] = useState('entry')
+    
+    const showReviewBoard = () => {
+        setActiveMode('review')
+        roomContext.dispatch({ type: 'SHOW_REVIEW_BOARD' })
+    }
 
     return (
         <styled.SidebarWrapper>
@@ -18,7 +25,7 @@ const Sidebar = () => {
                     </styled.ModeButton>
                     <styled.ModeButton 
                         hollow={activeMode !== 'review'}
-                        onClick={() => setActiveMode('review')}
+                        onClick={showReviewBoard}
                     >
                         Review
                     </styled.ModeButton>

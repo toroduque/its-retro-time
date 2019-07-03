@@ -55,6 +55,19 @@ const roomReducer = (state, action) => {
                 ...state,
                 showEditModal: false
             }
+        
+        case 'SHOW_REVIEW_BOARD':
+            return {
+                ...state,
+                showReviewBoard: true
+            }
+        
+        case 'HIDE_REVIEW_BOARD':
+            return {
+                ...state,
+                showReviewBoard: false
+            }
+
         default:
             return state
     }

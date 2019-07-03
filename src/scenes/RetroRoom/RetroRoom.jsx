@@ -1,10 +1,10 @@
 import React, { Fragment, useContext, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
 import { subscribeMessages, subscribeAuth } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { FIRST, SECOND, THIRD } from 'constants/column'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
+import ReviewBoard from 'scenes/ReviewBoard'
 import Sidebar from 'scenes/RetroRoom/components/Sidebar'
 import Column from 'scenes/RetroRoom/components/Column'
 import AddMessageModal from 'scenes/RetroRoom/components/AddMessageModal'
@@ -13,7 +13,7 @@ import * as styled from './styled'
 
 const RetroRoom = ({ match }) => {
     const roomContext = useContext(RoomContext)
-    const { messages, showAddModal, showEditModal } = roomContext.state
+    const { messages, showAddModal, showEditModal, showReviewBoard } = roomContext.state
     const { id } = match.params
     let unsubscribeFromMessages = null
     let unsubscribeFromAuth = null
@@ -58,7 +58,8 @@ const RetroRoom = ({ match }) => {
             <Footer />
             { showAddModal && <AddMessageModal /> }
             { showEditModal && <EditMessageModal /> }
-            { (showAddModal || showEditModal) && <styled.Overlay /> }
+            { showReviewBoard && <ReviewBoard />}
+            { (showAddModal || showEditModal || showReviewBoard) && <styled.Overlay /> }
         </Fragment>
     )
 }
