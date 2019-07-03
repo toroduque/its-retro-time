@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { addUserToRoom } from 'firebaseApi'
+import { addUserToRoom, signUp } from 'firebaseApi'
 import Header from 'components/Header'
 import Label from 'components/forms/Label'
 import Input from 'components/forms/Input'
@@ -15,7 +15,7 @@ const JoinRoom = ({history}) => {
     const handleSetName = e => setName(e.target.value)
     const handleSetRoomId = e => setRoomId(e.target.value)
 
-    const handleJoinRoom = e => {
+    const handleJoinRoom = async e => {
         e.preventDefault()
 
         // TODO: Add validations
@@ -23,7 +23,8 @@ const JoinRoom = ({history}) => {
             return
         }
 
-        addUserToRoom(roomId, name)
+        await signUp(name)
+        await addUserToRoom(roomId, name)
         history.push(`room/${roomId}`)
     }
 
