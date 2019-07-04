@@ -17,7 +17,7 @@ const roomReducer = (state, action) => {
                 ...state,
                 users: action.payload
             }
-
+        
         case 'SET_MESSAGES':
             return {
                 ...state,

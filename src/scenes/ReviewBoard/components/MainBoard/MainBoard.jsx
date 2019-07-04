@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, Fragment } from 'react'
 import { RoomContext, ReviewBoardContext } from 'contexts'
 import { filterMessagesByColumnNumber } from 'utilities'
 import Button from 'components/Button'
@@ -30,19 +30,28 @@ const MainBoard = () => {
 
     return (
         <styled.MainBoardWrapper>
-            <styled.NavigationWrapper>
-                <span>
-                    { index !== 0 && (<Button text icon onClick={prevMessage}>Previous</Button> )}
-                </span>
-                <span>
-                    { index < ( filteredMessages && filteredMessages.length - 1) && <Button text icon onClick={nextMessage}>Next</Button>}
-                </span>
-            </styled.NavigationWrapper>
-            <styled.ContentWrapper>
-                <styled.Title>{selectedColumn.title}</styled.Title>
-                <styled.Message>{filteredMessages && filteredMessages[index].message}</styled.Message>
-                <styled.Author>by {filteredMessages && filteredMessages[index].user}</styled.Author>
-            </styled.ContentWrapper>
+            { filteredMessages && filteredMessages.length ? (
+                 <Fragment>
+                     <styled.NavigationWrapper>
+                        <span>
+                            { index !== 0 && (<Button text icon onClick={prevMessage}>Previous</Button> )}
+                        </span>
+                        <span>
+                            { index < (filteredMessages.length - 1) && <Button text icon onClick={nextMessage}>Next</Button>}
+                        </span>
+                    </styled.NavigationWrapper>
+                    <styled.ContentWrapper>
+                        <styled.Title>{selectedColumn.title}</styled.Title>
+                        <styled.Message>{filteredMessages[index].message}</styled.Message>
+                        <styled.Author>by {filteredMessages[index].user}</styled.Author>
+                    </styled.ContentWrapper>
+                 </Fragment>
+                 ) : (<styled.ContentWrapper>
+                        <styled.Title>{selectedColumn.title}</styled.Title>
+                        <styled.Message>No Messages</styled.Message>
+                    </styled.ContentWrapper>)
+            }
+            
         </styled.MainBoardWrapper>
     )
 }

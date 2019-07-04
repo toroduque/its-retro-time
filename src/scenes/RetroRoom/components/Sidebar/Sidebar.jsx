@@ -7,7 +7,6 @@ import UsersList from 'scenes/RetroRoom/components/UsersList';
 const Sidebar = () => {
     const roomContext = useContext(RoomContext)
     const { isShowingReviewBoard } = roomContext.state
-    const [ activeMode, setActiveMode ] = useState('entry')
     
     const showReviewBoard = () => {
         roomContext.dispatch({ type: 'SHOW_REVIEW_BOARD' })

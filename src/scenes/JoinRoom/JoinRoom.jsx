@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { addUserToRoom, signUp } from 'firebaseApi'
 import Header from 'components/Header'
@@ -8,9 +8,14 @@ import Button from 'components/Button'
 import Footer from 'components/Footer'
 import * as styled from './styled'
 
-const JoinRoom = ({history}) => { 
+const JoinRoom = ({history, match}) => { 
     const [ name, setName ] = useState('')
     const [ roomId, setRoomId ] = useState('')
+
+    useEffect(() => {
+        const { id } = match.params
+        if (id) setRoomId(id)
+    }, [])
 
     const handleSetName = e => setName(e.target.value)
     const handleSetRoomId = e => setRoomId(e.target.value)

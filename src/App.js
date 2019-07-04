@@ -26,7 +26,7 @@ const theme = {
 }
 
 const App = () => { 
-    const [ state, dispatch ] = useReducer(roomReducer, { isShowingReviewBoard: false })
+    const [ state, dispatch ] = useReducer(roomReducer, { isShowingReviewBoard: false, users: [] })
 
     return (
     <RoomContext.Provider value={{state, dispatch}}>
@@ -37,8 +37,18 @@ const App = () => {
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/create-room" component={CreateRoom}/>
-                        <Route path="/join-room" component={JoinRoom}/>
+                        <Route path="/join-room/:id?" component={JoinRoom}/>
                         <Route path="/room/:id" component={RetroRoom} />
+                        {/* TODO: Create a proper 404 you lazy! */}
+                        <div style={{
+                            display:'flex', 
+                            alignItems:'center', 
+                            width: '100%',
+                            justifyContent: 'center',
+                            width: '100%',
+                            position: 'fixed',
+                            top: '50%'
+                        }}><h1>Op's! 404</h1></div>
                     </Switch>
                 </BrowserRouter>
             </Fragment>
