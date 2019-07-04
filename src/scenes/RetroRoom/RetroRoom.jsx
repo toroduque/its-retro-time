@@ -11,22 +11,28 @@ import AddMessageModal from 'scenes/RetroRoom/components/AddMessageModal'
 import EditMessageModal from 'scenes/RetroRoom/components/EditMessageModal'
 import * as styled from './styled'
 
-const RetroRoom = ({ match }) => {
+const RetroRoom = ({ history, match }) => {
     const roomContext = useContext(RoomContext)
-    const { messages, showAddModal, showEditModal, isShowingReviewBoard } = roomContext.state
+    const { messages, showAddModal, showEditModal, isShowingReviewBoard, currentUser } = roomContext.state
     const { id } = match.params
     let unsubscribeFromMessages = null
     let unsubscribeFromAuth = null
 
     useEffect(() => {
         subscribeMessages(id, setMessages).then(response => unsubscribeFromMessages = response)
-        subscribeAuth(setCurrentUser).then(response => unsubscribeFromAuth = response) 
+        subscribeAuth(setCurrentUser).then(response => unsubscribeFromAuth = response)
 
         return function cleanUp() { 
                 unsubscribeFromMessages()
                 unsubscribeFromAuth() 
             }
     }, [])
+
+    useEffect(() => {
+        if (currentUser === null) {
+            history.push(`/join-room/${id}`)
+        }
+    }, [currentUser])
 
     const setMessages = messages => {
         roomContext.dispatch({
@@ -42,10 +48,17 @@ const RetroRoom = ({ match }) => {
         })
     }
 
+    const addUserToList = user => {
+        roomContext.dispatch({
+            type: 'ADD_USER_TO_LIST',
+            payload: user
+        })
+    }
+
     return (
         <Fragment>
             <styled.HeaderWrapper>
-                <Header />
+                <Header showShareButton />
             </styled.HeaderWrapper>
             <styled.RoomWrapper>
                 <Sidebar />
