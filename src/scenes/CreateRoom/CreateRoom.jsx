@@ -12,9 +12,8 @@ import * as styled from './styled'
 const CreateRoom = ({history}) => {
     const [ name, setName ] = useState('')
     const [ team, seTeam ] = useState('')
-    const [ organisation, setOrganisation ] = useState('')
+    const [ company, setCompany ] = useState('')
     const roomContext = useContext(RoomContext)
-    
 
     function handleName(e) {
         setName(e.target.value)
@@ -25,7 +24,7 @@ const CreateRoom = ({history}) => {
     }
     
     function handleOrganisation(e) {
-        setOrganisation(e.target.value)
+        setCompany(e.target.value)
     }
 
     async function handleCreateRoom(e) {
@@ -57,6 +56,7 @@ const CreateRoom = ({history}) => {
                             value={name} 
                             onChange={handleName}
                             placeholder="John Smith"
+                            required
                         />
                         <styled.HorizontalContainer>
                             <styled.Half>
@@ -64,14 +64,14 @@ const CreateRoom = ({history}) => {
                                 <Input 
                                     value={team} 
                                     onChange={handleTeam}
-                                    placeholder="Infrastructure"
+                                    placeholder="Mobile"
                                 />
                             </ styled.Half> 
 
                             <styled.Half>
-                                <Label optional>Organisation</Label>
+                                <Label optional>Company</Label>
                                 <Input 
-                                    value={organisation} 
+                                    value={company} 
                                     onChange={handleOrganisation} 
                                     placeholder="Kneebook"
                                 />

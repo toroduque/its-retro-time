@@ -13,7 +13,7 @@ import * as styled from './styled'
 
 const RetroRoom = ({ match }) => {
     const roomContext = useContext(RoomContext)
-    const { messages, showAddModal, showEditModal, showReviewBoard } = roomContext.state
+    const { messages, showAddModal, showEditModal, isShowingReviewBoard } = roomContext.state
     const { id } = match.params
     let unsubscribeFromMessages = null
     let unsubscribeFromAuth = null
@@ -58,8 +58,8 @@ const RetroRoom = ({ match }) => {
             <Footer />
             { showAddModal && <AddMessageModal /> }
             { showEditModal && <EditMessageModal /> }
-            { showReviewBoard && <ReviewBoard />}
-            { (showAddModal || showEditModal || showReviewBoard) && <styled.Overlay /> }
+            { isShowingReviewBoard && <ReviewBoard />}
+            { (showAddModal || showEditModal || isShowingReviewBoard) && <styled.Overlay /> }
         </Fragment>
     )
 }

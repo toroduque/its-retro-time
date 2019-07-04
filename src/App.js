@@ -26,7 +26,7 @@ const theme = {
 }
 
 const App = () => { 
-    const [ state, dispatch ] = useReducer(roomReducer, {})
+    const [ state, dispatch ] = useReducer(roomReducer, { isShowingReviewBoard: false })
 
     return (
     <RoomContext.Provider value={{state, dispatch}}>

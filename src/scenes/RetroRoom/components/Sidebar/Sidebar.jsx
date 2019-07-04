@@ -6,10 +6,10 @@ import UsersList from 'scenes/RetroRoom/components/UsersList';
 
 const Sidebar = () => {
     const roomContext = useContext(RoomContext)
+    const { isShowingReviewBoard } = roomContext.state
     const [ activeMode, setActiveMode ] = useState('entry')
     
     const showReviewBoard = () => {
-        setActiveMode('review')
         roomContext.dispatch({ type: 'SHOW_REVIEW_BOARD' })
     }
 
@@ -18,13 +18,12 @@ const Sidebar = () => {
             <SidebarSection title="Mode" icon="mode">
                 <styled.ModeButtonsWrapper>
                     <styled.ModeButton 
-                        hollow={activeMode !== 'entry'}
-                        onClick={() => setActiveMode('entry')}
+                        hollow={isShowingReviewBoard}
                     >
                         Entry
                     </styled.ModeButton>
                     <styled.ModeButton 
-                        hollow={activeMode !== 'review'}
+                        hollow={!isShowingReviewBoard}
                         onClick={showReviewBoard}
                     >
                         Review
