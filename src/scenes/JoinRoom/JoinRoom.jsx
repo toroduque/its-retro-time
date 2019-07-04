@@ -30,7 +30,7 @@ const JoinRoom = ({history, match}) => {
 
         await signUp(name)
         await addUserToRoom(roomId, name)
-        history.push(`room/${roomId}`)
+        history.push(`/room/${roomId}`)
     }
 
     return (
