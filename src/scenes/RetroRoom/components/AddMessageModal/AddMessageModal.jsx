@@ -22,6 +22,7 @@ const AddMessageModal = ({ match }) => {
     const handlePostMessage = async () => {
         const body = {
             user: currentUser.displayName,
+            userId: currentUser.uid,
             roomRef: firestore.doc(`rooms/${id}`),
             state: 'unread',
             creationTime: new Date(),

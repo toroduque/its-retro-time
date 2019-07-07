@@ -1,28 +1,35 @@
 import React, { useState, useContext } from 'react'
 import { getMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
-import Unread from './components/Unread'
-import Read from './components/Read'
+import Button from 'components/Button';
+import Icon from 'components/Icon';
 import * as styled from './styled'
 
-const Card = ({ id, user, message}) => {
+const Card = ({ id, user, userId, message}) => {
     const roomContext = useContext(RoomContext)
-    const [ unread, setUnread ] = useState(true)
+    const { uid } = roomContext.state.currentUser
+    const isCurrentUserMessage = userId === uid
 
     const showEditModal = () => roomContext.dispatch({type: 'SHOW_EDIT_MODAL'})
     const selectMessage = (message) => roomContext.dispatch({type: 'SELECT_MESSAGE', payload: message})
 
     const handleShowEditModal = async () => {
-        const selectedMessage = await getMessage(id)
-        await selectMessage(selectedMessage)
-        showEditModal()
+        if (isCurrentUserMessage) {
+            const selectedMessage = await getMessage(id)
+            await selectMessage(selectedMessage)
+            showEditModal()
+        }
     }
 
     return (
-        <styled.CardWrapper onClick={handleShowEditModal}>
+        <styled.CardWrapper >
             <styled.MessageWrapper>
-                <span onClick={() => setUnread(!unread) }>{message}</span>
-                { unread ? <Unread /> : <Read /> }
+                <span>{message}</span>
+                { isCurrentUserMessage && (
+                    <Button icon text onClick={handleShowEditModal}>
+                        <Icon glyph="pencil" size="14"/>
+                    </Button>
+                )}
             </styled.MessageWrapper>
             <h5>By {user}</h5>
         </styled.CardWrapper>

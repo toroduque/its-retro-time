@@ -17,4 +17,13 @@ export const CardWrapper = styled.div`
 export const MessageWrapper = styled.div`
     display: flex;
     justify-content: space-between;
+
+    svg {
+        fill: ${props => props.theme.GRAY};
+        transition: 0.3s;
+
+        &:hover {
+            fill: ${props => props.theme.PRIMARY};
+        }
+    }
 `
