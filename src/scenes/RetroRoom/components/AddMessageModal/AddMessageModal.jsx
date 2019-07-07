@@ -11,8 +11,9 @@ import TextArea from 'components/forms/TextArea'
 import * as styled from './styled'
 
 const AddMessageModal = ({ match }) => {
-    const [ message, setMessage ] = useState('')
     const roomContext = useContext(RoomContext)
+    const [ message, setMessage ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(false)
     const { id } = match.params
     const { selectedColumn, currentUser } = roomContext.state
     const { title, position } = selectedColumn
@@ -20,6 +21,8 @@ const AddMessageModal = ({ match }) => {
     const handleSetMessage = e => setMessage(e.target.value)
 
     const handlePostMessage = async () => {
+        setIsLoading(true)
+
         const body = {
             user: currentUser.displayName,
             userId: currentUser.uid,
@@ -31,6 +34,7 @@ const AddMessageModal = ({ match }) => {
         }
 
         await postMessage(body)
+        setIsLoading(false)
         hideAddModal()
     }
 
@@ -55,7 +59,7 @@ const AddMessageModal = ({ match }) => {
                 />
                 <styled.ButtonsWrapper>
                     <Button text onClick={hideAddModal}>Cancel</Button>
-                    <Button onClick={handlePostMessage}>Post</Button>
+                    <Button isLoading={isLoading} onClick={handlePostMessage}>Post</Button>
                 </styled.ButtonsWrapper>
             </styled.AddMessageWrapper>
         </Modal>

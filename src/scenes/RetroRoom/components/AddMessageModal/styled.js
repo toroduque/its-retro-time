@@ -14,6 +14,7 @@ export const AddMessageWrapper = styled.div`
     h2 {
         color: ${ props => props.theme.PRIMARY };
         font-weight: 500;
+        text-transform: capitalize;
     }
 `
 

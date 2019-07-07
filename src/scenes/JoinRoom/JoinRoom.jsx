@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import { addUserToRoom, signUp } from 'firebaseApi'
+import { withRouter } from 'react-router-dom'
+import { getRoom, addUserToRoom, signUp } from 'firebaseApi'
 import Header from 'components/Header'
 import Label from 'components/forms/Label'
 import Input from 'components/forms/Input'
@@ -11,6 +11,7 @@ import * as styled from './styled'
 const JoinRoom = ({history, match}) => { 
     const [ name, setName ] = useState('')
     const [ roomId, setRoomId ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(false)
 
     useEffect(() => {
         const { id } = match.params
@@ -19,14 +20,17 @@ const JoinRoom = ({history, match}) => {
 
     const handleSetName = e => setName(e.target.value)
     const handleSetRoomId = e => setRoomId(e.target.value)
+    const redirectHome = () => history.push('/')
 
     const handleJoinRoom = async e => {
         e.preventDefault()
 
         // TODO: Add validations
-        if (!roomId || !name) {
-            return
-        }
+        if (!roomId || !name) return
+
+        setIsLoading(true)
+        const room = await getRoom(roomId)
+        if (!room) return setIsLoading(false)
 
         await signUp(name)
         await addUserToRoom(roomId, name)
@@ -38,26 +42,27 @@ const JoinRoom = ({history, match}) => {
             <Header />
             <styled.Container>
                 <styled.FormWrapper>
-                    <form>
+                    <form onSubmit={e => handleJoinRoom(e) }>
                         <h1>Join room</h1>
                         <Label>Name</Label>
                         <Input 
                             value={name} 
                             onChange={handleSetName}
                             placeholder="John Smith"
+                            name="username"
+                            required
                         />
                         <Label>Room Id</Label>
                         <Input 
                             value={roomId} 
                             onChange={handleSetRoomId}
                             placeholder="12345"
+                            name="roomId"
+                            required
                         />
-                
                         <styled.ButtonsWrapper>
-                            <Link to="/" >
-                                <Button text>Cancel</Button>
-                            </Link>
-                            <Button onClick={e => handleJoinRoom(e)}>Join</Button>
+                            <Button type="button" onClick={redirectHome} text>Cancel</Button>
+                            <Button type="submit" isLoading={isLoading}>Join</Button>
                         </styled.ButtonsWrapper>
                     </form>
                 </styled.FormWrapper>
