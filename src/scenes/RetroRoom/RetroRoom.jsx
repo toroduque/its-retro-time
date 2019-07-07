@@ -13,7 +13,7 @@ import * as styled from './styled'
 
 const RetroRoom = ({ history, match }) => {
     const roomContext = useContext(RoomContext)
-    const { messages, showAddModal, showEditModal, isShowingReviewBoard, currentUser } = roomContext.state
+    const { messages, showAddModal, showEditModal, isShowingReviewBoard, currentUser, columnsName } = roomContext.state
     const { id } = match.params
     let unsubscribeFromMessages = null
     let unsubscribeFromAuth = null
@@ -50,13 +50,6 @@ const RetroRoom = ({ history, match }) => {
         })
     }
 
-    const addUserToList = user => {
-        roomContext.dispatch({
-            type: 'ADD_USER_TO_LIST',
-            payload: user
-        })
-    }
-
     return (
         <Fragment>
             <styled.HeaderWrapper>
@@ -65,9 +58,9 @@ const RetroRoom = ({ history, match }) => {
             <styled.RoomWrapper>
                 <Sidebar />
                 <styled.ColumnsWrapper>
-                    <Column title="Good" position={FIRST} cards={messages} />
-                    <Column title="Not so good" position={SECOND} cards={messages} />
-                    <Column title="To improve" position={THIRD} cards={messages} />
+                    <Column title={columnsName && columnsName.FIRST} position={FIRST} cards={messages} />
+                    <Column title={columnsName && columnsName.SECOND} position={SECOND} cards={messages} />
+                    <Column title={columnsName && columnsName.THIRD} position={THIRD} cards={messages} />
                 </styled.ColumnsWrapper>
             </styled.RoomWrapper>
             <Footer />

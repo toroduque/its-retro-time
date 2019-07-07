@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { createRoom, getRoom, signUp } from 'firebaseApi'
 import { RoomContext } from 'contexts'
+import { FIRST, SECOND, THIRD } from 'constants/column'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Input from 'components/forms/Input'
@@ -35,7 +36,16 @@ const CreateRoom = ({history}) => {
             return
         }
 
-        const room = { creationTime: new Date(), users: [ name ]}
+        const room = { 
+            creationTime: new Date(), 
+            users: [ name ],
+            columnsName: {
+                FIRST: 'Good',
+                SECOND: 'Not so good',
+                THIRD: 'To improve'
+            }
+        }
+
         const newRoom = await createRoom(room)
         const { users } = await getRoom(newRoom.id)
         signUp(name)
@@ -49,7 +59,7 @@ const CreateRoom = ({history}) => {
             <Header />
             <styled.Container>
                 <styled.FormWrapper>
-                    <form>
+                    <form onSubmit={e => handleCreateRoom(e)}>
                         <h1>Create new retro</h1>
                         <Label>Name</Label>
                         <Input 

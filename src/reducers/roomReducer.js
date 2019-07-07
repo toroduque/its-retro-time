@@ -12,10 +12,11 @@ const roomReducer = (state, action) => {
                 currentUser: action.payload
             }
 
-        case 'SET_USERS': 
+        case 'SET_ROOM_INFO': 
             return {
                 ...state,
-                users: action.payload
+                users: action.payload.users,
+                columnsName: action.payload.columnsName
             }
         
         case 'SET_MESSAGES':

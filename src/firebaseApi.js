@@ -74,19 +74,19 @@ export const getRoom = async (id) => {
     }
 }
 
-export const subscribeUsers = async (roomId, setUsers) => {
+export const subscribeRoom = async (roomId, setRoomInfo) => {
     try {
         const unsubscribeFn = await firestore.collection('rooms')
         .doc(roomId)
         .onSnapshot(snapshot => {
             const roomData = collectIdsAndDocs(snapshot)
-            setUsers(roomData.users)
+            setRoomInfo(roomData)
         })
 
     return unsubscribeFn
 
     } catch (error) {
-        console.error(`Error subscribing to Users updates: ${error}`)
+        console.error(`Error subscribing to Room updates: ${error}`)
     }
 }
 
@@ -94,13 +94,22 @@ export const addUserToRoom = async (roomId, user) => {
     try {
         const room = await getRoom(roomId)
         const { users } = room
-        console.log('users', users)
-
         const newUsers = [ ...users, user ]
 
         await firestore.collection('rooms').doc(roomId).update({users: newUsers})
     } catch (error) {
         console.error(`Error adding a new user to existing room: ${error}`)
+    }
+}
+
+export const updateColumnName = async (roomId, columnOrder, newName) => {
+    try {
+        const roomUpdate = {};
+        roomUpdate[`columnsName.${columnOrder}`] = newName;
+
+        await firestore.collection('rooms').doc(roomId).update(roomUpdate)
+    } catch (error) {
+        console.error(`Error updating ${columnOrder}'s name: ${error}`)
     }
 }
 
