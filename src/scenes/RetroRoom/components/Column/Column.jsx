@@ -27,7 +27,7 @@ const Column = ({title = '', cards, position, match}) => {
 
     const handleUpdateColumnName = async e => {
         e.preventDefault()
-        await updateColumnName(id, position, columnTitle)
+        await updateColumnName(id, position, `${columnTitle}`.toLowerCase())
     }
 
     const filterCardsByColumnNumber = () => {

@@ -10,8 +10,9 @@ import InlineDelete from 'components/InlineDelete'
 import * as styled from './styled'
 
 const EditMessageModal = () => {
-    const [ currentMessage, setCurrentMessage ] = useState('')
     const roomContext = useContext(RoomContext)
+    const [ currentMessage, setCurrentMessage ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(false)
     const { selectedMessage } = roomContext.state
 
     useEffect(() => {
@@ -21,6 +22,7 @@ const EditMessageModal = () => {
     const handleSetNewMessage = e => setCurrentMessage(e.target.value)
 
     const handleUpdateMessage = async () => {
+        setIsLoading(true)
         await updateMessage(selectedMessage.id, currentMessage)
         hideEditModal()
     }
@@ -38,7 +40,7 @@ const EditMessageModal = () => {
         <Modal>
             <styled.EditMessageWrapper>
                 <styled.TitleWrapper>
-                    <h2>EDIT</h2>
+                    <h2>Edit</h2>
                     <Button icon text onClick={hideEditModal}>
                         <Icon  glyph="close" size="14" color={GRAY} />
                     </Button>
@@ -53,7 +55,7 @@ const EditMessageModal = () => {
                     <InlineDelete onDelete={handleDeleteMessage}/>
                     <styled.ButtonsWrapper>
                         <Button text onClick={hideEditModal}>Cancel</Button>
-                        <Button onClick={handleUpdateMessage}>Update</Button>
+                        <Button isLoading={isLoading} onClick={handleUpdateMessage}>Update</Button>
                     </styled.ButtonsWrapper>
                 </styled.BottomWrapper>
             </styled.EditMessageWrapper>

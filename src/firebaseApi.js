@@ -67,8 +67,11 @@ export const createRoom = async (room) => {
 export const getRoom = async (id) => {
     try {
         const doc = await firestore.collection('rooms').doc(id).get()
+        if (doc.exists === false ) throw new Error(`Room with id ${id} does not exist`)
+
         const room = collectIdsAndDocs(doc)
         return room
+        
     } catch (error) {
         console.error(`Error retrieving data of a room: ${error}`)
     }

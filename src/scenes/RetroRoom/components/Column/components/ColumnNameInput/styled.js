@@ -6,8 +6,6 @@ export const ColumnNameInputWrapper = styled.div`
     svg {
         opacity: 0;
         transition: 0.3s;
-
-     
     }
 
     &:hover {

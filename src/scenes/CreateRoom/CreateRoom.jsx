@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { createRoom, getRoom, signUp } from 'firebaseApi'
 import { RoomContext } from 'contexts'
-import { FIRST, SECOND, THIRD } from 'constants/column'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Input from 'components/forms/Input'
@@ -14,6 +13,7 @@ const CreateRoom = ({history}) => {
     const [ name, setName ] = useState('')
     const [ team, seTeam ] = useState('')
     const [ company, setCompany ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(false)
     const roomContext = useContext(RoomContext)
 
     function handleName(e) {
@@ -24,8 +24,12 @@ const CreateRoom = ({history}) => {
         seTeam(e.target.value)
     }
     
-    function handleOrganisation(e) {
+    function handleCompany(e) {
         setCompany(e.target.value)
+    }
+
+    function redirectHome() {
+        history.push('/')
     }
 
     async function handleCreateRoom(e) {
@@ -35,6 +39,8 @@ const CreateRoom = ({history}) => {
         if (!name) {
             return
         }
+
+        setIsLoading(true)
 
         const room = { 
             creationTime: new Date(), 
@@ -48,7 +54,7 @@ const CreateRoom = ({history}) => {
 
         const newRoom = await createRoom(room)
         const { users } = await getRoom(newRoom.id)
-        signUp(name)
+        await signUp(name)
         roomContext.dispatch({type: 'SET_USERS', payload: users})
 
         history.push(`room/${newRoom.id}`)
@@ -67,6 +73,7 @@ const CreateRoom = ({history}) => {
                             onChange={handleName}
                             placeholder="John Smith"
                             required
+                            name="username"
                         />
                         <styled.HorizontalContainer>
                             <styled.Half>
@@ -82,16 +89,24 @@ const CreateRoom = ({history}) => {
                                 <Label optional>Company</Label>
                                 <Input 
                                     value={company} 
-                                    onChange={handleOrganisation} 
+                                    onChange={handleCompany} 
                                     placeholder="Kneebook"
                                 />
                             </ styled.Half>  
                         </styled.HorizontalContainer>
                         <styled.ButtonsWrapper>
-                            <Link to="/">
-                                <Button text>Cancel</Button>
-                            </Link>
-                            <Button onClick={e => handleCreateRoom(e)}>Create</Button>
+                            <Button
+                                onClick={redirectHome} 
+                                type="button" text
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                type="submit" 
+                                isLoading={isLoading} 
+                            >
+                                Create
+                            </Button>
                         </styled.ButtonsWrapper>
                     </form>
                 </styled.FormWrapper>
