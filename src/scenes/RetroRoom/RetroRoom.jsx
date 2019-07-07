@@ -22,9 +22,11 @@ const RetroRoom = ({ history, match }) => {
         subscribeMessages(id, setMessages).then(response => unsubscribeFromMessages = response)
         subscribeAuth(setCurrentUser).then(response => unsubscribeFromAuth = response)
 
-        return function cleanUp() { 
-                unsubscribeFromMessages()
-                unsubscribeFromAuth() 
+        return function cleanUp() {
+                if (unsubscribeFromMessages && unsubscribeFromAuth) {
+                    unsubscribeFromMessages()
+                    unsubscribeFromAuth() 
+                }
             }
     }, [])
 

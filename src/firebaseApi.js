@@ -1,5 +1,6 @@
 import { firestore, auth } from './firebase'
 import { collectIdsAndDocs } from './utilities'
+import { SESSION } from 'constants/firebase'
 
 // ---   MESSAGES   ---
 
@@ -93,6 +94,8 @@ export const addUserToRoom = async (roomId, user) => {
     try {
         const room = await getRoom(roomId)
         const { users } = room
+        console.log('users', users)
+
         const newUsers = [ ...users, user ]
 
         await firestore.collection('rooms').doc(roomId).update({users: newUsers})
@@ -114,6 +117,7 @@ export const subscribeAuth = async(setCurrentUser) => {
 
 export const signUp = async (displayName) => {
     try {
+        await auth.setPersistence(SESSION)
         await auth.signInAnonymously()
         await auth.currentUser.updateProfile({ displayName })
     } catch (error) {
