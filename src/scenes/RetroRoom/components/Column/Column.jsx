@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { withRouter } from 'react-router-dom'
+import { updateColumnName } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import Button from 'components/Button'
 import Card from 'scenes/RetroRoom/components/Card'
+import ColumnNameInput from './components/ColumnNameInput'
 import * as styled from './styled'
 
-const Column = ({title, cards, position}) => {
+const Column = ({title = '', cards, position, match}) => {
     const [ columnTitle, setColumnTitle ] = useState('')
     const roomContext = useContext(RoomContext)
+    const { id } = match.params
 
     useEffect(() => {
         setColumnTitle(title)
-    }, [])
+    }, [title])
 
     const handleSetTitle = e => {
         setColumnTitle(e.target.value)
@@ -21,6 +25,11 @@ const Column = ({title, cards, position}) => {
         roomContext.dispatch({type: 'SHOW_ADD_MODAL', payload })
     }
 
+    const handleUpdateColumnName = async e => {
+        e.preventDefault()
+        await updateColumnName(id, position, columnTitle)
+    }
+
     const filterCardsByColumnNumber = () => {
         return cards && cards.filter(card => card.columnNumber === position)
     }
@@ -29,7 +38,11 @@ const Column = ({title, cards, position}) => {
 
     return ( 
         <styled.ColumnWrapper>
-            <input value={columnTitle} onChange={handleSetTitle}/>
+            <ColumnNameInput 
+                value={columnTitle} 
+                onChange={handleSetTitle} 
+                onSubmit={handleUpdateColumnName}
+            />
             <Button text onClick={showAddModal}>
                 + ADD 
             </Button>
@@ -40,4 +53,4 @@ const Column = ({title, cards, position}) => {
     )
 }
 
-export default Column
+export default withRouter(Column)

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { RoomContext } from 'contexts'
-import { subscribeUsers } from 'firebaseApi'
+import { subscribeRoom } from 'firebaseApi'
 import { withRouter } from 'react-router-dom'
 import * as styled from './styled'
 
@@ -13,14 +13,20 @@ const UsersList = ({match}) => {
     let unsubscribe = null;
 
     useEffect(() => {
-        subscribeUsers(id, setUsers).then(response => unsubscribe = response)
-        return function cleanUp() { unsubscribe() }
+        subscribeRoom(id, setRoomInfo).then(response => unsubscribe = response)
+        return function cleanUp() { 
+            if (unsubscribe) {
+                unsubscribe() 
+            }
+        }
     }, [])
 
-    const setUsers = users => {
+    const setRoomInfo = roomInfo => {
+        const { users, columnsName } = roomInfo
+
         roomContext.dispatch({
-            type: 'SET_USERS',
-            payload: users
+            type: 'SET_ROOM_INFO',
+            payload: { users, columnsName }
         })
     }
 
