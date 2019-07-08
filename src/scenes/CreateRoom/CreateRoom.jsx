@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { createRoom, getRoom, signUp } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import Header from 'components/Header'
@@ -54,8 +54,9 @@ const CreateRoom = ({history}) => {
 
         const newRoom = await createRoom(room)
         const { users } = await getRoom(newRoom.id)
-        await signUp(name)
+        const newUser = await signUp(name)
         roomContext.dispatch({type: 'SET_USERS', payload: users})
+        roomContext.dispatch({type: 'SET_CURRENT_USER', payload: newUser})
 
         history.push(`room/${newRoom.id}`)
     }

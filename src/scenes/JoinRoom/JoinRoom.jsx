@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import { getRoom, addUserToRoom, signUp } from 'firebaseApi'
+import { RoomContext } from 'contexts'
 import Header from 'components/Header'
 import Label from 'components/forms/Label'
 import Input from 'components/forms/Input'
@@ -9,6 +10,7 @@ import Footer from 'components/Footer'
 import * as styled from './styled'
 
 const JoinRoom = ({history, match}) => { 
+    const roomContext = useContext(RoomContext)
     const [ name, setName ] = useState('')
     const [ roomId, setRoomId ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false)
@@ -32,7 +34,8 @@ const JoinRoom = ({history, match}) => {
         const room = await getRoom(roomId)
         if (!room) return setIsLoading(false)
 
-        await signUp(name)
+        const newUser = await signUp(name)
+        await roomContext.dispatch({type: 'SET_CURRENT_USER', payload: newUser})
         await addUserToRoom(roomId, name)
         history.push(`/room/${roomId}`)
     }

@@ -130,8 +130,10 @@ export const subscribeAuth = async(setCurrentUser) => {
 export const signUp = async (displayName) => {
     try {
         await auth.setPersistence(SESSION)
-        await auth.signInAnonymously()
+        const newUser = await auth.signInAnonymously()
         await auth.currentUser.updateProfile({ displayName })
+
+        return newUser
     } catch (error) {
         console.error(`Error signing up a new user: ${error}`)
     }
