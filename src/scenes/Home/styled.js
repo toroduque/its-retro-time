@@ -5,7 +5,7 @@ export const HomeWrapper = styled.div`
     background-image: url(${bgImage});
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 5rem 6rem;
+    padding: 2rem 6rem;
 `
 
 export const Container = styled.div`
