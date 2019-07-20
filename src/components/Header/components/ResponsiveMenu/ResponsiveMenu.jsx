@@ -9,13 +9,21 @@ import * as styled from './styled'
 const ResponsiveMenu = ({options, closeMenu}) => (
     <Modal>
         <styled.ResponsiveMenuWrapper>
-            <Button icon text onClick={closeMenu}>
-                <Icon glyph="close" color={GRAY} size="16" />
-            </Button>
-            <Link to="/create-room">
-                <Button hollow fontSize="1.6rem">Create Room</Button>
-            </Link>
-            { options.map(option => <styled.MenuOption key={option.name}>{option.name}</styled.MenuOption>)}
+            <styled.CloseMenuWrapper>
+                <Button icon text onClick={closeMenu}>
+                    <Icon glyph="close" color={GRAY} size="16" />
+                </Button>
+            </styled.CloseMenuWrapper>
+            <styled.CreateRoomWrapper>
+                <Link to="/create-room">
+                    <Button hollow fontSize="1.6rem">Create Room</Button>
+                </Link>
+            </styled.CreateRoomWrapper>
+            { options.map(option => (
+                <Link to={option.path} key={option.name}>
+                    <styled.MenuOption >{option.name}</styled.MenuOption>
+                </Link>)
+            )}
         </styled.ResponsiveMenuWrapper>
     </Modal>
 )

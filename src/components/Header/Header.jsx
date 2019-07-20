@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { PRIMARY } from 'constants/colors'
+import { DESKTOP_QUERY, MOBILE_QUERY } from 'constants/responsive'
 import Logo from 'components/Logo'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
@@ -18,8 +19,8 @@ const Header = ({logoColor = PRIMARY}) => {
         { name: 'Join Room', path: '/join-room' }
     ]
 
-    const isDesktopOrLaptop = useMediaQuery({ query: '(min-device-width: 841px)' })
-    const isMobile = useMediaQuery({ query: '(max-width: 840px)' })
+    const isDesktopOrLaptop = useMediaQuery(DESKTOP_QUERY)
+    const isMobile = useMediaQuery(MOBILE_QUERY)
     const toggleMenu = () => setResponsiveMenu(!showResponsiveMenu)
 
     return (
@@ -30,6 +31,7 @@ const Header = ({logoColor = PRIMARY}) => {
 
             { isDesktopOrLaptop && (
                 <styled.NavlinksWrapper>
+                    {console.log("isDesktop")}
                     { 
                         menuOptions.map(option => (
                             <styled.Navlink key={option.name}>
@@ -44,6 +46,7 @@ const Header = ({logoColor = PRIMARY}) => {
 
             { isMobile && (
                 <Fragment>
+                    {console.log("isMobile")}
                     <Button icon text onClick={toggleMenu}>
                         <Icon glyph="hamburger" size="22" color={logoColor} />
                     </Button>
