@@ -4,6 +4,7 @@ import { RoomContext } from 'contexts'
 import { FIRST, SECOND, THIRD } from 'constants/column'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
+import Overlay from 'components/Overlay'
 import ReviewBoard from 'scenes/ReviewBoard'
 import Sidebar from 'scenes/RetroRoom/components/Sidebar'
 import Column from 'scenes/RetroRoom/components/Column'
@@ -67,7 +68,7 @@ const RetroRoom = ({ history, match }) => {
             { showAddModal && <AddMessageModal /> }
             { showEditModal && <EditMessageModal /> }
             { isShowingReviewBoard && <ReviewBoard />}
-            { (showAddModal || showEditModal || isShowingReviewBoard) && <styled.Overlay /> }
+            { (showAddModal || showEditModal || isShowingReviewBoard) && <Overlay /> }
         </Fragment>
     )
 }
