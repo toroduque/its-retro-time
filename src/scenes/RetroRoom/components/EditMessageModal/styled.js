@@ -37,6 +37,10 @@ export const ButtonsWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
+
+    @media ${MOBILE_QUERY.query}{
+      margin-top: 3rem;
+    }
 `
 
 export const BottomWrapper = styled.div`
@@ -44,4 +48,8 @@ export const BottomWrapper = styled.div`
     justify-content: space-between; 
     align-items: center; 
     margin-top: 1rem;
+
+    @media ${MOBILE_QUERY.query}{
+      display: block;
+    }
 `
