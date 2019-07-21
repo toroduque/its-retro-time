@@ -1,12 +1,15 @@
 import React, { Fragment, useContext, useEffect } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import { subscribeMessages, subscribeAuth } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { FIRST, SECOND, THIRD } from 'constants/column'
+import { DESKTOP_QUERY, MOBILE_QUERY } from 'constants/responsive'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Overlay from 'components/Overlay'
 import ReviewBoard from 'scenes/ReviewBoard'
 import Sidebar from 'scenes/RetroRoom/components/Sidebar'
+import MobileMenu from 'scenes/RetroRoom/components/MobileMenu'
 import Column from 'scenes/RetroRoom/components/Column'
 import AddMessageModal from 'scenes/RetroRoom/components/AddMessageModal'
 import EditMessageModal from 'scenes/RetroRoom/components/EditMessageModal'
@@ -37,6 +40,9 @@ const RetroRoom = ({ history, match }) => {
         }
     }, [currentUser])
 
+    const isDesktop = useMediaQuery(DESKTOP_QUERY)
+    const isMobile = useMediaQuery(MOBILE_QUERY)
+
     const setMessages = messages => {
         roomContext.dispatch({
             type: 'SET_MESSAGES',
@@ -56,8 +62,9 @@ const RetroRoom = ({ history, match }) => {
             <styled.HeaderWrapper>
                 <Header showShareButton />
             </styled.HeaderWrapper>
+                { isMobile && <MobileMenu />}
             <styled.RoomWrapper>
-                <Sidebar />
+                { isDesktop && <Sidebar /> }
                 <styled.ColumnsWrapper>
                     <Column title={columnsName && columnsName.FIRST} position={FIRST} cards={messages} />
                     <Column title={columnsName && columnsName.SECOND} position={SECOND} cards={messages} />
