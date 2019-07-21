@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { MOBILE_QUERY } from 'constants/responsive'
 import { MODAL_WIDTH } from 'constants/layout'
 
 export const AddMessageWrapper = styled.div`
@@ -10,12 +11,21 @@ export const AddMessageWrapper = styled.div`
     width: ${ MODAL_WIDTH }rem;
     background-color: white;
     padding: 1rem 3rem 3rem 3rem;
+    box-sizing: border-box;
 
     h2 {
         color: ${ props => props.theme.PRIMARY };
         font-weight: 500;
         text-transform: capitalize;
     }
+
+    @media ${MOBILE_QUERY.query}{
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        height: 100vh;
+    } 
 `
 
 export const TitleWrapper = styled.div`

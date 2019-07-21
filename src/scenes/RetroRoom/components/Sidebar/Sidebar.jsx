@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { RoomContext } from 'contexts'
 import * as styled from './styled'
 import SidebarSection from 'scenes/RetroRoom/components/SidebarSection';

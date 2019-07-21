@@ -14,4 +14,5 @@ export const HeaderWrapper = styled.div`
 export const ColumnsWrapper = styled.div`
     display: flex;
     flex: 1;
+    overflow-x: scroll;
 `

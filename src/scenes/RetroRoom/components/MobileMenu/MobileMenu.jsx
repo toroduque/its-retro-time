@@ -2,13 +2,13 @@ import React, { useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { RoomContext } from 'contexts'
 import { subscribeRoom } from 'firebaseApi'
+import Button from 'components/Button'
 import * as styled from './styled'
 
-const UsersList = ({match}) => {
+const MobileMenu = ({match}) => {
     const roomContext = useContext(RoomContext)
-    const { users, currentUser } = roomContext.state
+    const { users } = roomContext.state
     const { id } = match.params
-    const userName = currentUser && currentUser.displayName
     
     let unsubscribe = null;
 
@@ -30,16 +30,21 @@ const UsersList = ({match}) => {
         })
     }
 
+    const showReviewBoard = () => {
+        roomContext.dispatch({ type: 'SHOW_REVIEW_BOARD' })
+    }
+
     return (
-        <styled.UsersListWrapper>
-            <ul>
-                { users && users.map(user => (
-                    <styled.User key={user} isActive={user === userName}>{user}</styled.User>
-                    )) 
-                }
-            </ul>
-        </styled.UsersListWrapper>
+        <styled.MobileMenuWrapper>
+            <styled.Container>
+                <Button text icon onClick={showReviewBoard}>Review</Button>
+            </styled.Container>
+            <styled.Container>
+                <styled.SectionTitle>Users:</styled.SectionTitle> 
+                <styled.UsersCount>{users && users.length}</styled.UsersCount>
+            </styled.Container>
+        </styled.MobileMenuWrapper>
     )
 }
 
-export default withRouter(UsersList)
+export default withRouter(MobileMenu)
