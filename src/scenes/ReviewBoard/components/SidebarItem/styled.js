@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { MOBILE_QUERY } from 'constants/responsive'
 
 export const SidebarItemWrapper = styled.div`
     display: flex;
@@ -7,6 +8,12 @@ export const SidebarItemWrapper = styled.div`
     background-color: ${props => props.isActive ? '#f9f9f9' : 'white'};
     align-items: center;
     justify-content: space-between;
+
+    @media ${MOBILE_QUERY.query} {
+        flex: 1;
+        border-left: none;
+        border-bottom: solid 0.2rem ${props => props.isActive ? props.theme.PRIMARY : 'white'};
+    }
 `
 
 export const NotificationsCountWrapper = styled.div`

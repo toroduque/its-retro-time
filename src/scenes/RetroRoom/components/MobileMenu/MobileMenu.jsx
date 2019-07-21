@@ -30,10 +30,14 @@ const MobileMenu = ({match}) => {
         })
     }
 
+    const showReviewBoard = () => {
+        roomContext.dispatch({ type: 'SHOW_REVIEW_BOARD' })
+    }
+
     return (
         <styled.MobileMenuWrapper>
             <styled.Container>
-                <Button text icon>Review</Button>
+                <Button text icon onClick={showReviewBoard}>Review</Button>
             </styled.Container>
             <styled.Container>
                 <styled.SectionTitle>Users:</styled.SectionTitle> 
