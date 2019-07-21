@@ -31,7 +31,6 @@ const Header = ({logoColor = PRIMARY}) => {
 
             { isDesktopOrLaptop && (
                 <styled.NavlinksWrapper>
-                    {console.log("isDesktop")}
                     { 
                         menuOptions.map(option => (
                             <styled.Navlink key={option.name}>
@@ -46,7 +45,6 @@ const Header = ({logoColor = PRIMARY}) => {
 
             { isMobile && (
                 <Fragment>
-                    {console.log("isMobile")}
                     <Button icon text onClick={toggleMenu}>
                         <Icon glyph="hamburger" size="22" color={logoColor} />
                     </Button>

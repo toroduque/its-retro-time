@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { RoomContext } from 'contexts'
 import { subscribeRoom } from 'firebaseApi'
-import { withRouter } from 'react-router-dom'
 import * as styled from './styled'
 
 const UsersList = ({match}) => {
