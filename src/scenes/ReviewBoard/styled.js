@@ -10,7 +10,7 @@ export const ReviewBoardWrapper = styled.div`
     transform: translate(-50%, -50%);
     z-index: 4;
 
-    @media ${MOBILE_QUERY.query}{
+    @media ${MOBILE_QUERY.query} {
         top: 0;
         left: 0;
         transform: none;
