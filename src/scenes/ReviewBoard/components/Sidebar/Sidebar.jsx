@@ -11,6 +11,7 @@ const Sidebar = () => {
     const { selectedColumn } = reviewContext.state
     const { messages } = roomContext.state
     let count = countMessagesByType(messages)
+    const { columnsName } = roomContext.state
 
     useEffect(() => {
         count = countMessagesByType(messages)
@@ -24,21 +25,21 @@ const Sidebar = () => {
     return (
         <styled.SidebarWrapper>
             <SidebarItem 
-                title="Good" 
+                title={columnsName.FIRST}
                 count={count.firstColumn} 
                 onClick={setSelectedColumn}
                 columnNumber={FIRST}
                 isActive={selectedColumn.number === FIRST}
             />
             <SidebarItem 
-                title="Not so good" 
+                title={columnsName.SECOND}
                 count={count.secondColumn}
                 onClick={setSelectedColumn}
                 columnNumber={SECOND}
                 isActive={selectedColumn.number === SECOND}
             />
             <SidebarItem 
-                title="To improve" 
+                title={columnsName.THIRD}
                 count={count.thirdColumn} 
                 onClick={setSelectedColumn}
                 columnNumber={THIRD}
