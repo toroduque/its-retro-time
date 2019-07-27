@@ -52,9 +52,10 @@ const CreateRoom = ({history}) => {
             }
         }
 
+        const newUser = await signUp(name)
         const newRoom = await createRoom(room)
         const { users } = await getRoom(newRoom.id)
-        const newUser = await signUp(name)
+        
         roomContext.dispatch({type: 'SET_USERS', payload: users})
         roomContext.dispatch({type: 'SET_CURRENT_USER', payload: newUser})
 
