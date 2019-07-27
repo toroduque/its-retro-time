@@ -16,3 +16,8 @@ export const SidebarSectionWrapper = styled.div`
         margin-right: 2rem;
     }
 `
+
+export const Container = styled.div`
+    display: flex; 
+    align-items: center;
+`

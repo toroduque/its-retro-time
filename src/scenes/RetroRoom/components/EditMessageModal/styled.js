@@ -47,7 +47,7 @@ export const BottomWrapper = styled.div`
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    margin-top: 1rem;
+    margin-top: 3rem;
 
     @media ${MOBILE_QUERY.query}{
       display: block;
