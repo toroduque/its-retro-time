@@ -15,8 +15,10 @@ const Footer = ({marginTop}) => {
                 <Fragment>
                     <span>Made in Melbourne - 2019</span>
                     <styled.SponsorWrapper>
-                        <Icon glyph="github" size="28" color={BLACK}/>
-                        <p>Sponsor us</p>
+                        <a href="https://github.com/toroduque/its-retro-time" target="_blank">
+                            <Icon glyph="github" size="28" color={BLACK}/>
+                            <p>Sponsor us</p>
+                        </a>
                     </styled.SponsorWrapper>
                 </Fragment>
             )}
@@ -25,7 +27,9 @@ const Footer = ({marginTop}) => {
                 <Fragment>
                     <span>Melbourne - 2019</span>
                     <styled.SponsorWrapper>
-                        <Icon glyph="github" size="22" color={BLACK}/>
+                        <a href="https://github.com/toroduque/its-retro-time" target="_blank">
+                            <Icon glyph="github" size="22" color={BLACK}/>
+                        </a>
                     </styled.SponsorWrapper>
                 </Fragment>
             )}

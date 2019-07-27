@@ -17,6 +17,13 @@ export const SponsorWrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
 
+    a {
+        color: ${ props => props.theme.BLACK };
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
     p {
         margin-left: 2rem;
     }
