@@ -5,6 +5,7 @@ export const ColumnWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     flex: 1;
+    height: intrinsic;
     padding: 3rem 1rem;
     background-color: ${props => props.theme.LIGHT_GRAY};
 
