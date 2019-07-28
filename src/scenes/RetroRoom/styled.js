@@ -15,4 +15,5 @@ export const ColumnsWrapper = styled.div`
     display: flex;
     flex: 1;
     overflow-x: scroll;
+    background-color: ${props => props.theme.LIGHT_GRAY};
 `
