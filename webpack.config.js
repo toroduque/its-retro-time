@@ -23,7 +23,8 @@ module.exports = {
     output: {
       path: __dirname + '/public',
       publicPath: '/',
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      chunkFilename: '[name].lazy-chunk.js'
     },
     devServer: {
       contentBase: './public',

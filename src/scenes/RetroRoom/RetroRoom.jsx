@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react'
+import React, { Fragment, Suspense, lazy, useContext, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { subscribeMessages, subscribeAuth } from 'firebaseApi'
 import { RoomContext } from 'contexts'
@@ -7,13 +7,15 @@ import { DESKTOP_QUERY, MOBILE_QUERY } from 'constants/responsive'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Overlay from 'components/Overlay'
-import ReviewBoard from 'scenes/ReviewBoard'
 import Sidebar from 'scenes/RetroRoom/components/Sidebar'
 import MobileMenu from 'scenes/RetroRoom/components/MobileMenu'
 import Column from 'scenes/RetroRoom/components/Column'
-import AddMessageModal from 'scenes/RetroRoom/components/AddMessageModal'
-import EditMessageModal from 'scenes/RetroRoom/components/EditMessageModal'
 import * as styled from './styled'
+
+const AddMessageModal = lazy(() => import(/* webpackChunkName: "AddMessageModal" */ '../RetroRoom/components/AddMessageModal'));
+const EditMessageModal = lazy(() => import(/* webpackChunkName: "EditMessageModal" */ '../RetroRoom/components/EditMessageModal'));
+const ReviewBoard = lazy(() => import(/* webpackChunkName: "ReviewBoard" */ '../ReviewBoard'));
+
 
 const RetroRoom = ({ history, match }) => {
     const roomContext = useContext(RoomContext)
@@ -72,10 +74,12 @@ const RetroRoom = ({ history, match }) => {
                 </styled.ColumnsWrapper>
             </styled.RoomWrapper>
             <Footer />
-            { showAddModal && <AddMessageModal /> }
-            { showEditModal && <EditMessageModal /> }
-            { isShowingReviewBoard && <ReviewBoard />}
-            { (showAddModal || showEditModal || isShowingReviewBoard) && <Overlay /> }
+            <Suspense fallback={<div>Loading...</div>}>
+                { showAddModal && <AddMessageModal /> }
+                { showEditModal && <EditMessageModal /> }
+                { isShowingReviewBoard && <ReviewBoard />}
+                { (showAddModal || showEditModal || isShowingReviewBoard) && <Overlay /> }
+            </Suspense>
         </Fragment>
     )
 }
