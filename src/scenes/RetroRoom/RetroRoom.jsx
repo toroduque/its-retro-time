@@ -7,12 +7,9 @@ import { DESKTOP_QUERY, MOBILE_QUERY } from 'constants/responsive'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Overlay from 'components/Overlay'
-// import ReviewBoard from 'scenes/ReviewBoard'
 import Sidebar from 'scenes/RetroRoom/components/Sidebar'
 import MobileMenu from 'scenes/RetroRoom/components/MobileMenu'
 import Column from 'scenes/RetroRoom/components/Column'
-// import AddMessageModal from 'scenes/RetroRoom/components/AddMessageModal'
-// import EditMessageModal from 'scenes/RetroRoom/components/EditMessageModal'
 import * as styled from './styled'
 
 const AddMessageModal = lazy(() => import(/* webpackChunkName: "AddMessageModal" */ '../RetroRoom/components/AddMessageModal'));
