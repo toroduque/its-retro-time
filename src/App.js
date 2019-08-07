@@ -7,9 +7,25 @@ import { RoomContext } from 'contexts'
 import roomReducer from 'reducers/roomReducer'
 import Home from 'scenes/Home'
 
-const CreateRoom = lazy(() => import(/* webpackChunkName: "createRoom" */ './scenes/CreateRoom'));
-const JoinRoom = lazy(() => import(/* webpackChunkName: "joinRoom" */ './scenes/JoinRoom'));
-const RetroRoom = lazy(() => import(/* webpackChunkName: "retroRoom" */ './scenes/RetroRoom'));
+const CreateRoom = lazy(() => import(
+    /* webpackChunkName: "createRoom" */
+    /* webpackPreload: true */
+    './scenes/CreateRoom'));
+
+const JoinRoom = lazy(() => import(
+    /* webpackChunkName: "joinRoom" */
+    /* webpackPreload: true */
+    './scenes/JoinRoom'));
+
+const RetroRoom = lazy(() => import(
+    /* webpackChunkName: "retroRoom" */
+    /* webpackPreload: true */
+    './scenes/RetroRoom'));
+    
+const FourOFour = lazy(() => import(
+    /* webpackChunkName: "FourOFour" */
+    /* webpackPreload: true */
+    './scenes/FourOFour'));
 
 // Styled-Compoents injects the global styles
 GlobalStyle
@@ -41,16 +57,7 @@ const App = () => {
                             <Route path="/create-room" component={CreateRoom}/>
                             <Route path="/join-room/:id?" component={JoinRoom}/>
                             <Route path="/room/:id" component={RetroRoom} />
-                            {/* TODO: Create a proper 404 you lazy! */}
-                            <div style={{
-                                display:'flex', 
-                                alignItems:'center', 
-                                width: '100%',
-                                justifyContent: 'center',
-                                width: '100%',
-                                position: 'fixed',
-                                top: '50%'
-                            }}><h1>Op's! 404</h1></div>
+                            <FourOFour />
                         </Switch>
                     </BrowserRouter>
                 </Suspense>

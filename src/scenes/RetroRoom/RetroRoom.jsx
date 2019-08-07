@@ -12,9 +12,20 @@ import MobileMenu from 'scenes/RetroRoom/components/MobileMenu'
 import Column from 'scenes/RetroRoom/components/Column'
 import * as styled from './styled'
 
-const AddMessageModal = lazy(() => import(/* webpackChunkName: "AddMessageModal" */ '../RetroRoom/components/AddMessageModal'));
-const EditMessageModal = lazy(() => import(/* webpackChunkName: "EditMessageModal" */ '../RetroRoom/components/EditMessageModal'));
-const ReviewBoard = lazy(() => import(/* webpackChunkName: "ReviewBoard" */ '../ReviewBoard'));
+const AddMessageModal = lazy(() => import(
+    /* webpackChunkName: "AddMessageModal" */
+    /* webpackPreload: true */
+    '../RetroRoom/components/AddMessageModal'));
+
+const EditMessageModal = lazy(() => import(
+    /* webpackChunkName: "EditMessageModal" */
+    /* webpackPreload: true */ 
+    '../RetroRoom/components/EditMessageModal'));
+
+const ReviewBoard = lazy(() => import(
+    /* webpackChunkName: "ReviewBoard" */
+    /* webpackPreload: true */ 
+    '../ReviewBoard'));
 
 
 const RetroRoom = ({ history, match }) => {
