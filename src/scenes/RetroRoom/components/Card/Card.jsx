@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { getMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { truncateString } from 'utilities'
