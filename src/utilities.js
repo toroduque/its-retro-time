@@ -32,3 +32,8 @@ export const countMessagesByType = messages => {
 export const filterMessagesByColumnNumber = (messages, columnNumber) => {
     return messages && messages.filter(message => message.columnNumber === columnNumber)
 }
+
+export const truncateString = (str, numberOfChars = 20) => {
+    const truncatedString = str.substring(0, numberOfChars)
+    return `${truncatedString}...`
+}
