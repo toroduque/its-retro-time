@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { getMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
+import { truncateString } from 'utilities'
 import Button from 'components/Button';
 import Icon from 'components/Icon';
 import * as styled from './styled'
@@ -24,7 +25,7 @@ const Card = ({ id, user, userId, message}) => {
     return (
         <styled.CardWrapper >
             <styled.MessageWrapper>
-                <span>{message}</span>
+                <span>{truncateString(message)}</span>
                 { isCurrentUserMessage && (
                     <Button icon text onClick={handleShowEditModal}>
                         <Icon glyph="pencil" size="14"/>
