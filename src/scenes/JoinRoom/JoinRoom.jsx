@@ -30,12 +30,16 @@ const JoinRoom = ({history, match}) => {
         // TODO: Add validations
         if (!roomId || !name) return
 
+        // Loader
         setIsLoading(true)
-        const room = await getRoom(roomId)
-        if (!room) return setIsLoading(false)
 
+        // Creates user
         const newUser = await signUp(name)
         await roomContext.dispatch({type: 'SET_CURRENT_USER', payload: newUser})
+
+        // Get room by id
+        const room = await getRoom(roomId)
+        if (!room) return setIsLoading(false)
         await addUserToRoom(roomId, name)
         history.push(`/room/${roomId}`)
     }

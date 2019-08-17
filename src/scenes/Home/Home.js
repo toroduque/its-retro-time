@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { DESKTOP_QUERY, MOBILE_QUERY } from 'constants/responsive'
