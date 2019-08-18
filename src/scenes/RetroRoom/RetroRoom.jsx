@@ -73,7 +73,7 @@ const RetroRoom = ({ history, match }) => {
     return (
         <Fragment>
             <styled.HeaderWrapper>
-                <Header showShareButton />
+                <Header insideRoom />
             </styled.HeaderWrapper>
                 { isMobile && <MobileMenu />}
             <styled.RoomWrapper>

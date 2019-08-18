@@ -8,10 +8,12 @@ import Button from 'components/Button'
 import Icon from 'components/Icon'
 import Overlay from 'components/Overlay'
 import ResponsiveMenu from './components/ResponsiveMenu'
+import ShareMenu from './components/ShareMenu'
 import * as styled from './styled'
 
-const Header = ({logoColor = PRIMARY}) => {
+const Header = ({logoColor = PRIMARY, insideRoom }) => {
     const [ showResponsiveMenu, setResponsiveMenu ] = useState(false)
+    const [ showShareMenu, setShowShareMenu ] = useState(false)
 
     const menuOptions = [
         { name: 'About', path: '/' },
@@ -22,6 +24,7 @@ const Header = ({logoColor = PRIMARY}) => {
     const isDesktopOrLaptop = useMediaQuery(DESKTOP_QUERY)
     const isMobile = useMediaQuery(MOBILE_QUERY)
     const toggleMenu = () => setResponsiveMenu(!showResponsiveMenu)
+    const toggleShareMenu = () => setShowShareMenu(!showShareMenu) 
 
     return (
         <styled.HeaderWrapper>
@@ -29,7 +32,17 @@ const Header = ({logoColor = PRIMARY}) => {
                 <Logo color={logoColor}/>
             </Link>
 
-            { isDesktopOrLaptop && (
+            { insideRoom && (
+                <div>  
+                    <styled.ShareButton text fontSize="1.6rem" onClick={toggleShareMenu}>
+                        <span>Share Room</span>
+                        <Icon glyph="share" size="16" />
+                    </styled.ShareButton>
+                    { showShareMenu && <ShareMenu />}
+                </div>
+            )}
+
+            { isDesktopOrLaptop && !insideRoom && (
                 <styled.NavlinksWrapper>
                     { 
                         menuOptions.map(option => (
@@ -55,7 +68,8 @@ const Header = ({logoColor = PRIMARY}) => {
                     }
                 </Fragment>  
             )}
-            { showResponsiveMenu && <Overlay onClick={toggleMenu} />}
+            { showResponsiveMenu && <Overlay onClick={toggleMenu} /> }
+            { showShareMenu && <Overlay onClick={toggleShareMenu} /> }
         </styled.HeaderWrapper>
     )
 }

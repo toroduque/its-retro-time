@@ -15,20 +15,13 @@ const Sidebar = () => {
     return (
         <styled.SidebarWrapper>
             <SidebarSection title="Mode" icon="mode">
-                <styled.ModeButtonsWrapper>
-                    <styled.ModeButton 
-                        hollow={isShowingReviewBoard}
-                    >
-                        Entry
-                    </styled.ModeButton>
-                    <styled.ModeButton 
-                        hollow={!isShowingReviewBoard}
-                        onClick={showReviewBoard}
-                    >
-                        Review
-                    </styled.ModeButton>
-                </styled.ModeButtonsWrapper>
-            </SidebarSection>
+                <styled.ModeButton 
+                    hollow={!isShowingReviewBoard}
+                    onClick={showReviewBoard}
+                >
+                    Review
+                </styled.ModeButton>
+        </SidebarSection>
             <SidebarSection title="Participants" icon="users">
                 <UsersList />
             </SidebarSection>
