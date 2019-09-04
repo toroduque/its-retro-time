@@ -5,6 +5,7 @@ import GlobalStyle from './globalStyle'
 import { PRIMARY, DARKER, BLACK, LIGHT_GRAY, GRAY, GREEN, RED, LIGHT_PURPLE } from './constants/colors'
 import { RoomContext } from 'contexts'
 import roomReducer from 'reducers/roomReducer'
+import Loading from 'components/Loading'
 import Home from 'scenes/Home'
 
 const CreateRoom = lazy(() => import(
@@ -50,7 +51,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <Fragment>
                 <GlobalStyle /> 
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loading />}>
                     <BrowserRouter>
                         <Switch>
                             <Route exact path="/" component={Home}/>
