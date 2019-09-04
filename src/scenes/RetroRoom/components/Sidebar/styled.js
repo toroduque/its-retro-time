@@ -15,6 +15,6 @@ export const ModeButtonsWrapper = styled.div`
 `
 
 export const ModeButton = styled(ButtonWrapper)`
-    width: 9rem;
+    width: 100%;
     padding: 0.8rem 0;
 `
