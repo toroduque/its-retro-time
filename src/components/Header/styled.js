@@ -32,7 +32,7 @@ export const ShareButton = styled(Button)`
     justify-content: space-between;
     background-color: tomato;
 
-    svg {
-        fill: ${props => props.theme.PRIMARY}
+    button > svg {
+        margin-left: 1rem;
     }
 `

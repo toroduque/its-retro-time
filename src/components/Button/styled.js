@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const ButtonWrapper = styled.button`
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: center;
     color: ${ props => {
         if (props.color) return props.color

@@ -35,8 +35,8 @@ const Header = ({logoColor = PRIMARY, insideRoom }) => {
             { insideRoom && (
                 <div>  
                     <styled.ShareButton text fontSize="1.6rem" onClick={toggleShareMenu}>
-                        <span>Share Room</span>
-                        <Icon glyph="share" size="16" />
+                        <span style={{marginRight: '1rem'}}>Share Room</span>
+                        <Icon glyph="share" size="16" color={PRIMARY}/>
                     </styled.ShareButton>
                     { showShareMenu && <ShareMenu />}
                 </div>

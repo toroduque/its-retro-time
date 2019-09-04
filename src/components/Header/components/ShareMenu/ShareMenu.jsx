@@ -1,19 +1,41 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Button from 'components/Button'
+import useClipboard from "react-use-clipboard"
+import { PRIMARY, BLACK } from 'constants/colors'
+import Icon from 'components/Icon'
 import * as styled from './styled'
 
-const ShareMenu = ({match}) => (
-    <styled.ShareMenuWrapper>
-        <h4>Share this room</h4>
-        <div style={{backgroundColor: 'lightgray', padding: '1rem', margin: '1rem 0'}}>
-            <h5>Url</h5>
-            {match.url}
-            <h5>Room Id</h5>
-            {match.params.id}
-        </div>
-        <Button>Copy link</Button>
-    </styled.ShareMenuWrapper>
-)
+const ShareMenu = ({match}) => {
+    const roomUrl = `https://its-retro-time.web.app${match.url}`
+    const roomId = match.params.id
+    const params = { successDuration: 2000 }
+    
+    const [ isIdCopied, setIdCopied ] = useClipboard(roomId, params);
+    const [ isUrlCopied, setUrlCopied ] = useClipboard(roomUrl, params);
+
+    return (
+        <styled.ShareMenuWrapper>
+            <styled.Title>Share this room</styled.Title>
+
+            <styled.ValueWrapper>
+                <styled.Label>Url</styled.Label>
+                <styled.Value onClick={() => setUrlCopied(roomUrl)}>
+                    { roomUrl }
+                    <Icon glyph="copy" size="10" color={BLACK}/>
+                </styled.Value>
+                <styled.Copied active={isUrlCopied} />
+            </styled.ValueWrapper>
+
+            <styled.ValueWrapper>
+                <styled.Label>Room Id</styled.Label>
+                <styled.Value onClick={() => setIdCopied(roomUrl)}>
+                    { roomId }
+                    <Icon glyph="copy" size="10" color={BLACK}/>
+                </styled.Value>
+                <styled.Copied active={isIdCopied} />
+            </styled.ValueWrapper>
+        </styled.ShareMenuWrapper>
+    )
+}
 
 export default withRouter(ShareMenu)
