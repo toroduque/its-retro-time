@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const ShareMenuWrapper = styled.div`
     background-color: white;
     z-index: 12;
-    width: 45rem;
+    width: 47rem;
     position: absolute;
     box-shadow: 0 0.6rem 1.2rem rgba(0,0,0,.3);
     padding: 2rem;
@@ -43,7 +43,6 @@ export const Value = styled.div`
 `
 
 export const ValueWrapper = styled.div`
-    margin-bottom: 2rem;
 `
 
 export const Copied = styled.div`
