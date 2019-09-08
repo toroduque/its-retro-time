@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import Button from 'components/Button'
+import EmojiMenu from './components/EmojiMenu'
 
 export const CardWrapper = styled.div`
     width: 100%;
@@ -11,7 +13,6 @@ export const CardWrapper = styled.div`
     h5 {
         margin: 0;
         color: ${props => props.theme.GRAY}; 
-        margin-top: 1rem
     }
 `
 export const MessageWrapper = styled.div`
@@ -27,3 +28,11 @@ export const MessageWrapper = styled.div`
         }
     }
 `
+
+export const BottomSectionWrapper = styled.div`
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 4rem;
+`
+
