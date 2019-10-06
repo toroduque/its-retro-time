@@ -46,6 +46,18 @@ export const updateMessage = async (id, message) => {
     }
 }
 
+export const updateReactions = async (id, userId, reaction) => {
+    try {
+        const doc = await firestore.collection('messages').doc(id).get()
+        const { reactions } = { ...collectIdsAndDocs(doc)}
+        reactions[reaction].push(userId)
+
+        await firestore.collection('messages').doc(id).update({reactions})
+    } catch(error) {
+        console.error(`Error updating messages reactions: ${error}`)
+    }
+}
+
 export const deleteMessage = async (id) => {
     try {
         await firestore.collection('messages').doc(id).delete()

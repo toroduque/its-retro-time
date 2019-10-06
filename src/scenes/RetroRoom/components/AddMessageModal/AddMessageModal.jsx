@@ -4,7 +4,7 @@ import { firestore } from '../../../../firebase'
 import { postMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { GRAY } from 'constants/colors'
-import { LIKE, LOVE, SMILE } from 'constants/reactions'
+import { LIKE, LOVE, SMILE, OCTOPUS } from 'constants/reactions'
 import Modal from 'components/Modal'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
@@ -22,7 +22,8 @@ const AddMessageModal = ({ match }) => {
     const reactions = {
         [LIKE] : [],
         [LOVE] : [],
-        [SMILE] : []
+        [SMILE] : [],
+        [OCTOPUS] : []
     }
  
     const handleSetMessage = e => setMessage(e.target.value)

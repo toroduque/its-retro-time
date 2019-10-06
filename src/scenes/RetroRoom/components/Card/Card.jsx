@@ -39,7 +39,7 @@ const Card = ({ id, user, userId, message, reactions}) => {
             <SelectedEmojis reactions={reactions} />
             <styled.BottomSectionWrapper>
                 <h5>By {user}</h5>
-                <EmojiMenu selectEmoji={setSelectedEmoji} />
+                <EmojiMenu messageId={id}/>
             </styled.BottomSectionWrapper>
         </styled.CardWrapper>
     )
