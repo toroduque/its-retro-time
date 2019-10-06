@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 export const AddEmojiButtonWrapper = styled.div`
     position: relative;
+
+    svg:hover {
+        fill: ${props => props.theme.PRIMARY };
+    }
 `
 
 export const EmojiMenuWrapper = styled.div`
@@ -19,6 +23,10 @@ export const EmojiMenuWrapper = styled.div`
 
     ${AddEmojiButtonWrapper}:hover & {
         opacity: 1;
+
+        svg {
+            fill: ${props => props.theme.PRIMARY };
+        }
     }
 `
 
@@ -26,13 +34,13 @@ export const EmojiWrapper = styled.div`
     padding: 0.1rem;
     background-color: white;
     border-radius: 50%;
-    margin: 0 0.1rem;
+    margin: 0 0.3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    font-size: 1.8rem;
+    width: 2.4rem;
+    height: 2.4rem;
 
     &:hover {
         background-color: ${props => props.theme.LIGHT_GRAY};

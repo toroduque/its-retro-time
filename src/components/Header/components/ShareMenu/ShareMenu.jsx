@@ -1,12 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import useClipboard from "react-use-clipboard"
-import { PRIMARY, BLACK } from 'constants/colors'
+import { BLACK } from 'constants/colors'
 import Icon from 'components/Icon'
 import * as styled from './styled'
 
 const ShareMenu = ({match}) => {
-    const roomUrl = `https://its-retro-time.web.app${match.url}`
+    const roomUrl = `https://retrotime.app${match.url}`
     const roomId = match.params.id
     const params = { successDuration: 2000 }
     

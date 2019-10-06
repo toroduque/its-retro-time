@@ -36,6 +36,8 @@ const Column = ({title = '', cards, position, match}) => {
 
     const filteredCards = filterCardsByColumnNumber()
 
+    console.log('filteredCards', filteredCards)
+
     return ( 
         <styled.ColumnWrapper>
             <ColumnNameInput 

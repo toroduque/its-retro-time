@@ -2,12 +2,13 @@ import React, { useContext, useState } from 'react'
 import { getMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { truncateString } from 'utilities'
-import Button from 'components/Button';
-import Icon from 'components/Icon';
+import Button from 'components/Button'
+import Icon from 'components/Icon'
 import EmojiMenu from './components/EmojiMenu'
+import SelectedEmojis from './components/SelectedEmojis'
 import * as styled from './styled'
 
-const Card = ({ id, user, userId, message}) => {
+const Card = ({ id, user, userId, message, reactions}) => {
     const roomContext = useContext(RoomContext)
     const { uid } = roomContext.state.currentUser
     const isCurrentUserMessage = userId === uid
@@ -35,7 +36,7 @@ const Card = ({ id, user, userId, message}) => {
                     </Button>
                 )}
             </styled.MessageWrapper>
-            <div>{selectedEmoji}</div>
+            <SelectedEmojis reactions={reactions} />
             <styled.BottomSectionWrapper>
                 <h5>By {user}</h5>
                 <EmojiMenu selectEmoji={setSelectedEmoji} />

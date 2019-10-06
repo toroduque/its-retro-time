@@ -4,6 +4,7 @@ import { firestore } from '../../../../firebase'
 import { postMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { GRAY } from 'constants/colors'
+import { LIKE, LOVE, SMILE } from 'constants/reactions'
 import Modal from 'components/Modal'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
@@ -17,6 +18,12 @@ const AddMessageModal = ({ match }) => {
     const { id } = match.params
     const { selectedColumn, currentUser } = roomContext.state
     const { title, position } = selectedColumn
+
+    const reactions = {
+        [LIKE] : [],
+        [LOVE] : [],
+        [SMILE] : []
+    }
  
     const handleSetMessage = e => setMessage(e.target.value)
 
@@ -30,7 +37,8 @@ const AddMessageModal = ({ match }) => {
             state: 'unread',
             creationTime: new Date(),
             columnNumber: position,
-            message
+            message,
+            reactions
         }
 
         await postMessage(body)
