@@ -9,7 +9,7 @@ import * as styled from './styled'
 
 const EmojiMenu = ({messageId}) => {
     const roomContext = useContext(RoomContext)
-    const { uid } = roomContext.state.currentUser
+    const { uid, displayName } = roomContext.state.currentUser
 
     return (
         <styled.AddEmojiButtonWrapper>
@@ -17,10 +17,10 @@ const EmojiMenu = ({messageId}) => {
                 <Icon glyph="face" size="14" color="lightgray"/>
             </Button>
             <styled.EmojiMenuWrapper>
-                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, LIKE)}> 👍</styled.EmojiWrapper>
-                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, LOVE)}> 💙</styled.EmojiWrapper>
-                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, SMILE)}> 😀</styled.EmojiWrapper>
-                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, OCTOPUS)}> 🐙</styled.EmojiWrapper>
+                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, displayName, LIKE)}> 👍</styled.EmojiWrapper>
+                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, displayName, LOVE)}> 💙</styled.EmojiWrapper>
+                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, displayName, SMILE)}> 😀</styled.EmojiWrapper>
+                <styled.EmojiWrapper icon text onClick={() => updateReactions(messageId, uid, displayName, OCTOPUS)}> 🐙</styled.EmojiWrapper>
             </styled.EmojiMenuWrapper>
         </styled.AddEmojiButtonWrapper>
     )

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { getMessage } from 'firebaseApi'
 import { RoomContext } from 'contexts'
 import { truncateString } from 'utilities'
@@ -12,8 +12,6 @@ const Card = ({ id, user, userId, message, reactions}) => {
     const roomContext = useContext(RoomContext)
     const { uid } = roomContext.state.currentUser
     const isCurrentUserMessage = userId === uid
-
-    const [ selectedEmoji, setSelectedEmoji ] = useState('')
 
     const showEditModal = () => roomContext.dispatch({type: 'SHOW_EDIT_MODAL'})
     const selectMessage = (message) => roomContext.dispatch({type: 'SELECT_MESSAGE', payload: message})
@@ -36,7 +34,7 @@ const Card = ({ id, user, userId, message, reactions}) => {
                     </Button>
                 )}
             </styled.MessageWrapper>
-            <SelectedEmojis reactions={reactions} />
+            <SelectedEmojis messageId={id} reactions={reactions} />
             <styled.BottomSectionWrapper>
                 <h5>By {user}</h5>
                 <EmojiMenu messageId={id}/>

@@ -46,11 +46,20 @@ export const updateMessage = async (id, message) => {
     }
 }
 
-export const updateReactions = async (id, userId, reaction) => {
+export const updateReactions = async (id, userId, userName, newReaction) => {
     try {
         const doc = await firestore.collection('messages').doc(id).get()
         const { reactions } = { ...collectIdsAndDocs(doc)}
-        reactions[reaction].push(userId)
+
+        const isUserFound = reactions[newReaction].some(reaction => reaction.userId === userId)
+
+        if (isUserFound) {
+            // Remove reaction if userId exists
+            reactions[newReaction] = reactions[newReaction].filter(reaction => reaction.userId !== userId)
+        } else {
+            // Add reaction if userId is new
+            reactions[newReaction].push({ userId, userName })
+        }
 
         await firestore.collection('messages').doc(id).update({reactions})
     } catch(error) {

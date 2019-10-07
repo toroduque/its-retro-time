@@ -8,6 +8,7 @@ export const SidebarItemWrapper = styled.div`
     background-color: ${props => props.isActive ? '#f9f9f9' : 'white'};
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
     @media ${MOBILE_QUERY.query} {
         flex: 1;
