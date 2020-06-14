@@ -24,6 +24,9 @@ const ResponsiveMenu = ({options, closeMenu}) => (
                     <styled.MenuOption >{option.name}</styled.MenuOption>
                 </Link>)
             )}
+            <a href="https://www.buymeacoffee.com/toroduque" target="_blank">
+                <styled.MenuOption >Sponsor</styled.MenuOption>
+            </a>
         </styled.ResponsiveMenuWrapper>
     </Modal>
 )

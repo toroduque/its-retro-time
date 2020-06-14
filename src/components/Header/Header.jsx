@@ -16,8 +16,7 @@ const Header = ({logoColor = PRIMARY, insideRoom }) => {
     const [ showShareMenu, setShowShareMenu ] = useState(false)
 
     const menuOptions = [
-        { name: 'About', path: '/' },
-        { name: 'Sponsor', path: '/' },
+        { name: 'About', path: '/about' },
         { name: 'Join Room', path: '/join-room' }
     ]
 
@@ -50,6 +49,9 @@ const Header = ({logoColor = PRIMARY, insideRoom }) => {
                                 <Link to={option.path}>{option.name}</Link>
                             </styled.Navlink>))
                     }
+                    <styled.Navlink>
+                        <a href="https://www.buymeacoffee.com/toroduque" target="_blank">Sponsor</a>
+                    </styled.Navlink>
                 <Link to="/create-room">
                     <Button hollow fontSize="1.6rem">Create Room</Button>
                 </Link>

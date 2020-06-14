@@ -22,6 +22,7 @@ export const SponsorWrapper = styled.div`
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        margin-left: 1rem;
     }
 
     p {

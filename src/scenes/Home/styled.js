@@ -7,6 +7,7 @@ export const HomeWrapper = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     padding: 2rem 6rem;
+    height: 100%;
 `
 
 export const Container = styled.div`
