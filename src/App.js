@@ -7,6 +7,7 @@ import { RoomContext } from 'contexts'
 import roomReducer from 'reducers/roomReducer'
 import Loading from 'components/Loading'
 import Home from 'scenes/Home'
+import About from 'scenes/About'
 
 const CreateRoom = lazy(() => import(
     /* webpackChunkName: "createRoom" */
@@ -47,24 +48,25 @@ const App = () => {
 
     return (
 
-    <RoomContext.Provider value={{state, dispatch}}>
-        <ThemeProvider theme={theme}>
-            <Fragment>
-                <GlobalStyle /> 
-                <Suspense fallback={<Loading />}>
-                    <BrowserRouter>
-                        <Switch>
-                            <Route exact path="/" component={Home}/>
-                            <Route path="/create-room" component={CreateRoom}/>
-                            <Route path="/join-room/:id?" component={JoinRoom}/>
-                            <Route path="/room/:id" component={RetroRoom} />
-                            <FourOFour />
-                        </Switch>
-                    </BrowserRouter>
-                </Suspense>
-            </Fragment>
-        </ThemeProvider>
-    </RoomContext.Provider>
-)}
+        <RoomContext.Provider value={{state, dispatch}}>
+            <ThemeProvider theme={theme}>
+                <Fragment>
+                    <GlobalStyle /> 
+                    <Suspense fallback={<Loading />}>
+                        <BrowserRouter>
+                            <Switch>
+                                <Route exact path="/" component={Home}/>
+                                <Route path="/about" component={About} />
+                                <Route path="/create-room" component={CreateRoom}/>
+                                <Route path="/join-room/:id?" component={JoinRoom}/>
+                                <Route path="/room/:id" component={RetroRoom} />
+                                <FourOFour />
+                            </Switch>
+                        </BrowserRouter>
+                    </Suspense>
+                </Fragment>
+            </ThemeProvider>
+        </RoomContext.Provider>
+    )}
 
 export default App

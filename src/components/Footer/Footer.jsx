@@ -8,17 +8,18 @@ import * as styled from './styled'
 const Footer = ({marginTop}) => {
     const isDesktopOrLaptop = useMediaQuery(DESKTOP_QUERY) 
     const isMobile = useMediaQuery(MOBILE_QUERY)
+    const currentYear = (new Date()).getFullYear()
 
     return (
         <styled.FooterWrapper marginTop={marginTop}>
             { isDesktopOrLaptop && (
                 <Fragment>
-                    <span>Made in Melbourne - 2019</span>
+                    <span>Made in Melbourne - {currentYear}</span>
                     <styled.SponsorWrapper>
                         <a href="https://github.com/toroduque/its-retro-time" target="_blank">
                             <Icon glyph="github" size="28" color={BLACK}/>
-                            <p>Sponsor us</p>
                         </a>
+                        <a href="https://www.buymeacoffee.com/toroduque" target="_blank">Sponsor us</a>
                     </styled.SponsorWrapper>
                 </Fragment>
             )}

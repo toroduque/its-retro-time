@@ -30,5 +30,9 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
     }
+
+    #app {
+        height: 100vh;
+    }
 `
 export default GlobalStyle
